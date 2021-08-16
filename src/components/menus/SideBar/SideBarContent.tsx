@@ -55,10 +55,6 @@ export function SideBarContent({ onOverlayClick }: SideBarContentProps): React.R
             ))}
           </div>
         </div>
-
-        <div className="flex-1 min-h-[1rem]" />
-
-        <div className="pb-5 pl-5 text-xs opacity-80">v1.05</div>
       </m.div>
 
       <MotionOverlay

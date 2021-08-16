@@ -29,9 +29,13 @@ export default function DashboardPage({ liveStake }: Props): React.ReactElement 
 
   return (
     <Layout>
-      <div className="flex-1">
-        <div className="px-4 sm:px-8 flex sm:mx-5 flex-col mx-1 overflow-y-scroll bg-white divide-y shadow-xl max-h-[85vh]  divide-opacity-10 divide-secondary lg:ml-14 rounded-3xl">
-          <div className={'sticky top-0 z-10 pt-5 space-y-2 bg-white xl:space-y-0 pb-7'}>
+      <div className="flex-1 w-full lg:w-auto">
+        <div className="px-4 sm:px-8 flex sm:mx-5 flex-col mx-1 overflow-y-scroll bg-white divide-y shadow-xl max-h-[85vh] divide-opacity-10 divide-secondary lg:ml-14 rounded-3xl">
+          <div
+            className={
+              'sticky top-0 left-0 right-0 z-10 grid grid-flow-row grid-cols-1 pt-5 space-y-2 bg-white xl:space-y-0 xl:grid-cols-2 pb-7'
+            }
+          >
             <div className="flex flex-col">
               <div className="text-lg font-bold">Stake Pools Partners</div>
               <div className="hidden mt-2 text-base opacity-60 sm:block">
@@ -41,7 +45,7 @@ export default function DashboardPage({ liveStake }: Props): React.ReactElement 
             </div>
           </div>
 
-          <table className="w-full text-sm sm:text-base">
+          <table className="text-sm sm:text-base">
             <tbody className="divide-y divide-opacity-10 divide-secondary">
               {PARTNERS.sort(compareFn).map((p) => (
                 <tr key={p.ticker}>
@@ -60,7 +64,7 @@ export default function DashboardPage({ liveStake }: Props): React.ReactElement 
                     </div>
                   </td>
 
-                  <td>
+                  <td className="hidden lg:block">
                     <div className="px-3 opacity-60 max-w-[1200px] m-0">{p.description}</div>
                   </td>
 
