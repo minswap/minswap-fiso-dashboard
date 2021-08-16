@@ -2,6 +2,7 @@ import * as React from 'react';
 import { GetStaticPropsResult } from 'next';
 import Image from 'next/image';
 
+import { getLiveStake } from 'src/api/poolpm';
 import { ExternallinkIcon } from 'src/components/icons';
 import { Layout } from 'src/components/Layout';
 import { Partner, PARTNERS } from 'src/data/partners';
@@ -35,7 +36,7 @@ export default function DashboardPage({ liveStake }: Props): React.ReactElement 
             <div className="flex flex-col">
               <div className="text-lg font-bold">Stake Pools Partners</div>
               <div className="hidden mt-2 text-base opacity-60 sm:block">
-                Live stake data is pulled from Blockfrost API so there might be a time lag. In case of pools having live
+                Live stake data is pulled from pool.pm API so there might be a time lag. In case of pools having live
                 stake close to each other, it is best to consult other websites before staking.
               </div>
             </div>
@@ -95,30 +96,7 @@ export default function DashboardPage({ liveStake }: Props): React.ReactElement 
 }
 
 export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
-  const apiKey = process.env['BLOCKFROST_API_KEY'];
-  if (apiKey === undefined) {
-    throw new Error('API Key not found');
-  }
-
-  type Response = {
-    hex: string;
-    live_stake: string;
-  };
-
-  const requests: Promise<Response>[] = PARTNERS.map((p) =>
-    fetch(`https://cardano-mainnet.blockfrost.io/api/v0/pools/${p.id}`, {
-      headers: {
-        project_id: apiKey,
-      },
-    }).then((res) => res.json()),
-  );
-
-  const responses: Response[] = await Promise.all(requests);
-
-  const liveStake: Record<string, number> = responses.reduce<Record<string, number>>((map, res) => {
-    map[res.hex] = parseInt(res.live_stake, 10) / 1_000_000;
-    return map;
-  }, {});
+  const liveStake = await getLiveStake();
 
   return {
     props: { liveStake },
