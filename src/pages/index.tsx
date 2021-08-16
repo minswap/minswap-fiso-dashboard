@@ -31,11 +31,7 @@ export default function DashboardPage({ liveStake }: Props): React.ReactElement 
     <Layout>
       <div className="flex-1 w-full px-2 lg:w-auto lg:pl-8 lg:px-0">
         <div className="px-4 sm:px-8 flex flex-col overflow-y-scroll bg-white divide-y shadow-xl max-h-[85vh] divide-opacity-10 divide-secondary rounded-3xl">
-          <div
-            className={
-              'sticky top-0 left-0 right-0 z-10 grid grid-flow-row grid-cols-1 pt-5 space-y-2 bg-white xl:space-y-0 xl:grid-cols-2 pb-7'
-            }
-          >
+          <div className={'sticky top-0 left-0 right-0 z-10 pt-5 space-y-2 bg-white xl:space-y-0 pb-7'}>
             <div className="flex flex-col">
               <div className="text-lg font-bold">Stake Pools Partners</div>
               <div className="hidden mt-2 text-base opacity-60 sm:block">
