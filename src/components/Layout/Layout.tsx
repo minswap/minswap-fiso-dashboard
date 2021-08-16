@@ -2,19 +2,37 @@ import * as React from 'react';
 
 import { Footer } from '../Footer';
 import { Header } from '../Header';
+import { MenuCollapseIcon, MenuIcon } from '../icons';
 import { NavBar } from '../menus/NavBar';
+import { SideBar } from '../menus/SideBar';
 
 type Props = {
   children: React.ReactNode;
 };
 
 export function Layout({ children }: Props) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+
+  function handleMenuButtonClick() {
+    setIsMobileMenuOpen((currentlyOpen) => !currentlyOpen);
+  }
+
+  function handleSideBarClose() {
+    setIsMobileMenuOpen(false);
+  }
+
   return (
     <div className="flex flex-col w-full min-h-full bg-mainLayout bg-opacity-60">
-      <Header />
+      <Header
+        menuIcon={isMobileMenuOpen ? <MenuCollapseIcon /> : <MenuIcon />}
+        onMenuButtonClick={handleMenuButtonClick}
+      />
 
-      <main className="flex items-start flex-1 px-5 pt-12 pb-12 lg:pt-10 lg:pb-0 lg:px-10">
+      <main className="flex items-start flex-1 pt-12 pb-12 lg:pt-10 lg:pb-0">
         <NavBar />
+
+        <SideBar isOpen={isMobileMenuOpen} onClose={handleSideBarClose} />
+
         {children}
       </main>
 
