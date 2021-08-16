@@ -31,14 +31,13 @@ export default function DashboardPage({ liveStake }: Props): React.ReactElement 
     <Layout>
       <div className="flex-1">
         <div className="px-4 sm:px-8 flex sm:mx-5 flex-col mx-1 overflow-y-scroll bg-white divide-y shadow-xl max-h-[85vh]  divide-opacity-10 divide-secondary lg:ml-14 rounded-3xl">
-          <div
-            className={
-              'sticky top-0 z-10 grid grid-flow-row grid-cols-1 pt-5 space-y-2 bg-white xl:space-y-0 xl:grid-cols-2 pb-7'
-            }
-          >
+          <div className={'sticky top-0 z-10 pt-5 space-y-2 bg-white xl:space-y-0 pb-7'}>
             <div className="flex flex-col">
-              <div className="text-lg font-bold">Pools</div>
-              <div className="hidden mt-2 text-base opacity-60 sm:block">FISO’s Liquidity Pools.</div>
+              <div className="text-lg font-bold">Stake Pools Partners</div>
+              <div className="hidden mt-2 text-base opacity-60 sm:block">
+                Live stake data is pulled from Blockfrost API so there might be a time lag. In case of pools having live
+                stake close to each other, so it is best to consult other websites before staking.
+              </div>
             </div>
           </div>
 

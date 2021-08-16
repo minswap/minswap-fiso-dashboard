@@ -18,7 +18,7 @@ export const PARTNERS: Partner[] = [
     id: '38927599cc3ff6b081501e0ee1dc4f0cb8ba012b3de8b49a785bb05a',
     ticker: 'MALU',
     description:
-      'Maluiin Pool is a charitable mission driven pool. It is a single pool, and a single operator pool.\nYou can find a lengthy description of my mission pinned to my twitter profile. It aims to bring free internet to mountainous tribes in West Papua. This will provide lifesaving and educational services.',
+      'Maluiin Pool is a charitable mission driven pool. It is a single pool, and a single operator pool. You can find a lengthy description of my mission pinned to my twitter profile. It aims to bring free internet to mountainous tribes in West Papua. This will provide lifesaving and educational services.',
     twitter: 'MaluiinP',
   },
   {
@@ -32,7 +32,7 @@ export const PARTNERS: Partner[] = [
     id: '059b4217a24a8c67a363968ff1db13a17ed96e611362450c115b2415',
     ticker: 'AMOON',
     description:
-      'We are single pool operator located in USA. We are part of Cardano Single Pool Alliance(CSPA). We are highly secure, reliable and cloud hosted with 2 relays, BP & Air Gapped machine for offline txns. We are in process of joining Cardano Mission Driven Pool Alliance to support Save the Children.',
+      'We are single pool operator located in USA. We are part of Cardano Single Pool Alliance (CSPA). We are highly secure, reliable and cloud hosted with 2 relays, BP & Air Gapped machine for offline txns. We are in process of joining Cardano Mission Driven Pool Alliance to support Save the Children.',
     twitter: 'adamoonpool',
   },
   {
