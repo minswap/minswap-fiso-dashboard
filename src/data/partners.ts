@@ -52,7 +52,7 @@ export const PARTNERS: Partner[] = [
     id: '1dc1e011d522a077a20b2659bd0ee257e0d80f105f5dc998d4cfda7c',
     ticker: 'GINGR',
     description:
-      "I'm Eva Ginger and my goal is to provide value to Cardano and its community through different projects. I am co-author of a funded F4 PC proposal, I support different NFT projects (Yifu Pedersen, unsigned_algo), and I run the GINGR pool. My personal mission is my contribution!",
+      "I'm Eva Ginger and my goal is to provide value to Cardano and its community through different projects. I am co-author of a funded F4 PC proposal, support different NFT projects (unsigned_algo, Yifu Pedersen), build up a DAO, and I run the GINGR pool. My personal mission is my contribution!",
     twitter: 'eva__ginger',
   },
   {
