@@ -13,13 +13,13 @@ export const subMenuLinks: MenuLinkModel[] = [
   },
   {
     text: 'Discord',
-    href: 'https://t.co/lwv9szY861?amp=1',
+    href: 'https://discord.gg/ZjB8ZBhkbm',
     icon: function renderItem({ className }: NavItemIconProps): React.ReactElement<NavItemIconProps> {
       return <DiscordIcon className={className} />;
     },
   },
   {
-    text: 'Github',
+    text: 'GitHub',
     href: 'https://github.com/minswap',
     icon: function renderItem({ className }: NavItemIconProps): React.ReactElement<NavItemIconProps> {
       return <GithubIcon className={className} />;
@@ -27,21 +27,21 @@ export const subMenuLinks: MenuLinkModel[] = [
   },
   {
     text: 'Medium',
-    href: 'https://github.com/minswap',
+    href: 'https://medium.com/minswap',
     icon: function renderItem({ className }: NavItemIconProps): React.ReactElement<NavItemIconProps> {
       return <MediumIcon className={className} />;
     },
   },
   {
     text: 'Reddit',
-    href: 'https://github.com/minswap',
+    href: 'https://www.reddit.com/r/MinSwap/',
     icon: function renderItem({ className }: NavItemIconProps): React.ReactElement<NavItemIconProps> {
       return <RedditIcon className={className} />;
     },
   },
   {
     text: 'Contact',
-    href: '#',
+    href: 'mailto:contact@minswap.org',
     icon: function renderItem({ className }: NavItemIconProps): React.ReactElement<NavItemIconProps> {
       return <ContactIcon className={className} />;
     },
