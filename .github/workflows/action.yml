@@ -1,0 +1,50 @@
+name: Test and build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Cache Dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install deps
+        run: npm install
+      - name: Cache Next.js
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}
+      - name: Prettify code
+        uses: creyD/prettier_action@v3.3
+        with:
+          dry: true
+          prettier_options: --write **/*.{js,ts,tsx,md}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run linter
+        run: npm run lint
+
+      - name: Run unit tests
+        run: npm test
+
+      - name: Build
+        run: npm run build

@@ -1,0 +1,75 @@
+{
+  "name": "minswap-interface",
+  "version": "1.0.0",
+  "description": "An open source interface for the Minswap protocol",
+  "engines": {
+    "node": "14"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "build:analyze": "cross-env ANALYZE=true yarn build",
+    "start": "next start",
+    "prepare": "husky install",
+    "lint": "next lint --dir src",
+    "format": "prettier --write ."
+  },
+  "keywords": [],
+  "author": "minswap",
+  "license": "MIT",
+  "dependencies": {
+    "@headlessui/react": "^1.4.0",
+    "@popperjs/core": "^2.9.3",
+    "big.js": "^6.1.1",
+    "bip39": "^3.0.4",
+    "classnames": "^2.3.1",
+    "crypto-random-string": "^4.0.0",
+    "decimal.js-light": "^2.5.1",
+    "ethers": "^5.4.4",
+    "framer-motion": "^4.1.17",
+    "from-exponential": "^1.1.1",
+    "json-bigint": "^1.0.0",
+    "next": "11.1.0",
+    "nookies": "^2.5.2",
+    "query-string": "^7.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-popper": "^2.2.5",
+    "react-query": "^3.19.2"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "11.0.1",
+    "@peculiar/webcrypto": "^1.1.7",
+    "@types/big.js": "^6.1.1",
+    "@types/json-bigint": "^1.0.1",
+    "@types/lodash": "^4.14.172",
+    "@types/node": "^14.17.9",
+    "@types/react": "^17.0.16",
+    "@types/react-dom": "^17.0.9",
+    "@typescript-eslint/eslint-plugin": "^4.29.0",
+    "autoprefixer": "^10.3.1",
+    "critters": "^0.0.10",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.32.0",
+    "eslint-config-next": "11.0.1",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-testing-library": "^4.10.1",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.1.2",
+    "msw": "^0.34.0",
+    "next-transpile-modules": "^8.0.0",
+    "postcss": "^8.3.6",
+    "prettier": "^2.3.2",
+    "sass": "^1.37.5",
+    "tailwindcss": "^2.2.7",
+    "typescript": "^4.3.5"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": "eslint --ext .ts,.tsx --fix",
+    "*.{js,css,md,json,ts,tsx,svg}": "prettier --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/minswap/minswap-interface.git"
+  }
+}
