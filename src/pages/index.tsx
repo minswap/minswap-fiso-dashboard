@@ -64,7 +64,7 @@ export default function DashboardPage({ liveStake }: Props): React.ReactElement 
                     </div>
                   </td>
 
-                  <td className="hidden lg:block">
+                  <td className="hidden lg:table-cell">
                     <div className="px-3 opacity-60 max-w-[1200px] m-0">{p.description}</div>
                   </td>
 
