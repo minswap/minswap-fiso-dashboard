@@ -1,97 +1,31 @@
 import * as React from 'react';
+import { GetStaticPropsResult } from 'next';
 import Image from 'next/image';
-import { useQuery } from 'react-query';
 
 import { ExternallinkIcon } from 'src/components/icons';
 import { Layout } from 'src/components/Layout';
+import { Partner, PARTNERS } from 'src/data/partners';
 
-const partners = [
-  {
-    ticker: 'BLADE',
-    description: 'We are 0% pool. Our mission is to deliver max returns to delegators.',
-    twitter: 'conraddit',
-  },
-  {
-    ticker: 'MALU',
-    description:
-      'Maluiin Pool is a charitable mission driven pool. It is a single pool, and a single operator pool.\nYou can find a lengthy description of my mission pinned to my twitter profile. It aims to bring free internet to mountainous tribes in West Papua. This will provide lifesaving and educational services.',
-    twitter: 'cryptofly777',
-  },
-  {
-    ticker: 'SWELL',
-    description:
-      'We are dedicated to offering reliable staking services at a low margin to support the Decentralization of Cardano.',
-    twitter: 'SwellPool',
-  },
-  {
-    ticker: 'AMOON',
-    description:
-      'We are single pool operator located in USA. We are part of Cardano Single Pool Alliance(CSPA). We are highly secure, reliable and cloud hosted with 2 relays, BP & Air Gapped machine for offline txns. We are in process of joining Cardano Mission Driven Pool Alliance to support Save the Children.',
-    twitter: 'adamoonpool',
-  },
-  {
-    ticker: 'ADAHS',
-    description: 'The ADA house is all about securing and decentralizing the Cardano network',
-    twitter: 'Bos020',
-  },
-  {
-    ticker: 'BACK',
-    description:
-      "Back The Blockchain's Mission: https://docs.google.com/document/d/1-4dBTTuydF-eesubln_2UH7MPFSkr5SdqUDb9EQZnlo/edit?usp=sharing",
-    twitter: 'BackBlockchain',
-  },
-  {
-    ticker: 'GINGR',
-    description:
-      "I'm Eva Ginger and my goal is to provide value to Cardano and its community through different projects. I am co-author of a funded F4 PC proposal, I support different NFT projects (Yifu Pedersen, unsigned_algo), and I run the GINGR pool. My personal mission is my contribution!",
-    twitter: 'eva__ginger',
-  },
-  {
-    ticker: 'VAULT',
-    description:
-      'Bare-metal server pool with the aim of growing Cardano and keep it from be centralized on cloud servers.',
-    twitter: 'StakeVault',
-  },
-  {
-    ticker: 'DEGAS',
-    description: 'Supporting emissions reduction and energy efficiency initiatives via donations and action',
-    twitter: 'Degas_StakePool',
-  },
-  {
-    ticker: 'RSV',
-    description:
-      'Reservoir Node runs on bare metal servers powered by off-the-grid solar installations. We have complete redundancy over two locations. We also run hosted relays in other countries.  ',
-    twitter: 'RSVNODE',
-  },
-];
+type Props = {
+  liveStake: Record<string, number>;
+};
 
-const partnersByTicker = partners.reduce<Record<string, true>>(
-  (current, p) => ({ ...current, [p.ticker]: true }),
-  {} as Record<string, true>,
-);
+export default function DashboardPage({ liveStake }: Props): React.ReactElement {
+  function formatLiveStake(s: number | undefined): string {
+    if (s === undefined) {
+      return '-';
+    }
+    return Math.floor(s).toLocaleString('en-US');
+  }
 
-export default function DashboardPage(): React.ReactElement {
-  const result = useQuery({
-    queryKey: 'pools-data',
-    async queryFn() {
-      const response = (await fetch('https://js.adapools.org/pools.json').then((res) => res.json())) as Record<
-        string,
-        { db_ticker: string; total_stake: string }
-      >;
-      return Object.values(response)
-        .filter((res) => partnersByTicker[res.db_ticker.toUpperCase()])
-        .reduce<Record<string, number>>(
-          (current, res) => ({
-            ...current,
-            [res.db_ticker.toUpperCase()]: +res.total_stake / Math.pow(10, 6),
-          }),
-          {},
-        );
-    },
-    refetchInterval: 1000 * 60, // 1 minute
-    staleTime: 1000 * 60,
-    refetchIntervalInBackground: true,
-  });
+  function compareFn(a: Partner, b: Partner): number {
+    const x = liveStake[a.id];
+    const y = liveStake[b.id];
+    if (x === undefined || y === undefined) {
+      return 0;
+    }
+    return x - y;
+  }
 
   return (
     <Layout>
@@ -110,7 +44,7 @@ export default function DashboardPage(): React.ReactElement {
 
           <table className="w-full text-sm sm:text-base">
             <tbody className="divide-y divide-opacity-10 divide-secondary">
-              {partners.map((p) => (
+              {PARTNERS.sort(compareFn).map((p) => (
                 <tr key={p.ticker}>
                   <td className="flex py-5 pl-4 space-x-2 sm:pl-8">
                     <div className="pt-1">
@@ -118,7 +52,7 @@ export default function DashboardPage(): React.ReactElement {
                         alt={p.ticker}
                         className="rounded-full"
                         height={40}
-                        src={`https://unavatar.io/${p.twitter}`}
+                        src={p.logo ?? `https://unavatar.io/${p.twitter}`}
                         width={40}
                       />
                     </div>
@@ -134,7 +68,7 @@ export default function DashboardPage(): React.ReactElement {
                   <td>
                     <div className="flex flex-col px-3">
                       <div className="opacity-60">Live Stake</div>
-                      {result.data ? <div>{result.data[p.ticker]}</div> : null}
+                      <div>{formatLiveStake(liveStake[p.id])}</div>
                     </div>
                   </td>
 
@@ -142,7 +76,7 @@ export default function DashboardPage(): React.ReactElement {
                     <div className="px-3">
                       <a
                         className="flex items-center text-lg gap-x-3 text-primary whitespace-nowrap"
-                        href={`https://twitter.com/${p.twitter}`}
+                        href={p.url ?? `https://twitter.com/${p.twitter}`}
                         rel="noopener noreferrer"
                         target="_blank"
                       >
@@ -159,4 +93,36 @@ export default function DashboardPage(): React.ReactElement {
       </div>
     </Layout>
   );
+}
+
+export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
+  const apiKey = process.env['BLOCKFROST_API_KEY'];
+  if (apiKey === undefined) {
+    throw new Error('API Key not found');
+  }
+
+  type Response = {
+    hex: string;
+    live_stake: string;
+  };
+
+  const requests: Promise<Response>[] = PARTNERS.map((p) =>
+    fetch(`https://cardano-mainnet.blockfrost.io/api/v0/pools/${p.id}`, {
+      headers: {
+        project_id: apiKey,
+      },
+    }).then((res) => res.json()),
+  );
+
+  const responses: Response[] = await Promise.all(requests);
+
+  const liveStake: Record<string, number> = responses.reduce<Record<string, number>>((map, res) => {
+    map[res.hex] = parseInt(res.live_stake, 10) / 1_000_000;
+    return map;
+  }, {});
+
+  return {
+    props: { liveStake },
+    revalidate: 60, // Cache for 1 minute
+  };
 }
