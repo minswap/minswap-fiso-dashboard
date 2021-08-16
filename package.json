@@ -18,6 +18,7 @@
   "author": "minswap",
   "license": "MIT",
   "dependencies": {
+    "@babel/core": "^7.15.0",
     "@headlessui/react": "^1.4.0",
     "@popperjs/core": "^2.9.3",
     "classnames": "^2.3.1",
