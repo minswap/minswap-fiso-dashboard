@@ -28,7 +28,7 @@ export function Layout({ children }: Props) {
         onMenuButtonClick={handleMenuButtonClick}
       />
 
-      <main className="flex items-start flex-1 pt-12 pb-12 lg:pt-10 lg:pb-0">
+      <main className="flex items-start flex-1 pt-12 pb-12 lg:pt-10 lg:pb-0 lg:px-5">
         <NavBar />
 
         <SideBar isOpen={isMobileMenuOpen} onClose={handleSideBarClose} />
