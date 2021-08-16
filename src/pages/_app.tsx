@@ -16,7 +16,7 @@ function MinswapFisoDashboardApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Minswap. | Multi-pool decentralized exchange on Cardano</title>
+        <title>Minswap FISO Dashboard</title>
         <meta charSet="UTF-8" />
         <meta content="Multi-pool decentralized exchange on Cardano" name="description" />
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
