@@ -36,7 +36,7 @@ export default function DashboardPage({ liveStake }: Props): React.ReactElement 
               <div className="text-lg font-bold">Stake Pools Partners</div>
               <div className="hidden mt-2 text-base opacity-60 sm:block">
                 Live stake data is pulled from Blockfrost API so there might be a time lag. In case of pools having live
-                stake close to each other, so it is best to consult other websites before staking.
+                stake close to each other, it is best to consult other websites before staking.
               </div>
             </div>
           </div>
