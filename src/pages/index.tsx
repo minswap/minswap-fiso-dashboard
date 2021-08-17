@@ -37,7 +37,7 @@ export default function DashboardPage({ liveStake }: Props): React.ReactElement 
         <div className="px-4 sm:px-8 flex flex-col overflow-y-scroll bg-white divide-y shadow-xl max-h-[85vh] divide-opacity-10 divide-secondary rounded-3xl">
           <div className={'sticky top-0 left-0 right-0 z-10 pt-5 space-y-2 bg-white xl:space-y-0 pb-7'}>
             <div className="flex flex-col">
-              <div className="text-lg font-bold">Smallest pool now: {sortedPartner[0]?.ticker}</div>
+              <div className="text-lg font-bold">Smallest pool now (25% bonus): {sortedPartner[0]?.ticker}</div>
               <div className="text-lg">Total stake: {formatLiveStake(totalStake)} ₳</div>
               <div className="hidden mt-2 text-base opacity-60 sm:block">
                 Live stake data is pulled from pool.pm API so there might be a time lag. In case of pools having live
