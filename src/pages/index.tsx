@@ -28,13 +28,17 @@ export default function DashboardPage({ liveStake }: Props): React.ReactElement 
     return x - y;
   }
 
+  const sortedPartner: Partner[] = PARTNERS.sort(compareFn);
+  const totalStake: number = Object.values(liveStake).reduce((sum, x) => sum + x, 0);
+
   return (
     <Layout>
       <div className="flex-1 w-full px-2 lg:w-auto lg:pl-8 lg:px-0">
         <div className="px-4 sm:px-8 flex flex-col overflow-y-scroll bg-white divide-y shadow-xl max-h-[85vh] divide-opacity-10 divide-secondary rounded-3xl">
           <div className={'sticky top-0 left-0 right-0 z-10 pt-5 space-y-2 bg-white xl:space-y-0 pb-7'}>
             <div className="flex flex-col">
-              <div className="text-lg font-bold">Stake Pools Partners</div>
+              <div className="text-lg font-bold">Smallest pool now: {sortedPartner[0]?.ticker}</div>
+              <div className="text-lg">Total stake: {formatLiveStake(totalStake)} ₳</div>
               <div className="hidden mt-2 text-base opacity-60 sm:block">
                 Live stake data is pulled from pool.pm API so there might be a time lag. In case of pools having live
                 stake close to each other, it is best to consult other websites before staking.
@@ -44,7 +48,7 @@ export default function DashboardPage({ liveStake }: Props): React.ReactElement 
 
           <table className="text-sm sm:text-base">
             <tbody className="divide-y divide-opacity-10 divide-secondary">
-              {PARTNERS.sort(compareFn).map((p) => (
+              {sortedPartner.map((p) => (
                 <tr key={p.ticker}>
                   <td className="flex py-5 pl-4 space-x-2 sm:pl-8">
                     <div className="pt-1">
