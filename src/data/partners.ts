@@ -91,7 +91,7 @@ export const PARTNERS: Partner[] = [
   },
   {
     id: 'ad7672d51077091866aff6fb43f9f3b75d427c961f6de8a135b07219',
-    ticker: 'APOOL',
+    ticker: 'ACI',
     description:
       'Single bare metal pool whose owners are activly working on Cardano dapp development and Cardano comunity. Here from the ITN, strugling with empty blocks.',
     twitter: 'marin1602',
