@@ -140,7 +140,7 @@ export const PARTNERS: Partner[] = [
     id: '91991d9238f3f270a46fc237acc3abcdf2456ff163c1639951d75d15',
     ticker: 'COINZ',
     description:
-      'Professional run pool by Cloud Solutions architect, security is top of mind. I donate 10% to Save The Children when we make a block. I am also working with my high school teacher reaching out to help continuation school students think beyond their current situation.',
+      'Professional run pool by Cloud Solutions architect, security is top of mind. I donate 10% to a charity when we mint a block, currently focused on the American Cancer Society. I am passionate about teaching and being an example, Cardano is making that more possible.',
     twitter: 'adacoinz',
   },
   {
