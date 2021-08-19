@@ -106,7 +106,7 @@ export const PARTNERS: Partner[] = [
     id: 'c2b8bff5160dd75149f2cae0955698550e8cf0d390025b26a9508a3e',
     ticker: 'QCPOL',
     description:
-      'We’re two friends running a pool on bare-metal servers hosted in Québec. We want to build a community around Cardano for Quebecers (so mainly French stuff). We love poutine! P.S.: Our pledge is currently 15k, but will be upgraded to 20k in the next epoch (280).',
+      'We’re two friends running a pool on bare-metal servers hosted in Québec. We want to build a community around Cardano for Quebecers (so mainly French stuff). We love poutine!',
     twitter: 'QCPOLstakepool',
   },
   {
