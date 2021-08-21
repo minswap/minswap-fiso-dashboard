@@ -2,17 +2,12 @@ import * as React from 'react';
 import { GetStaticPropsResult } from 'next';
 import Image from 'next/image';
 
-import { getStakePools } from 'src/api/stakePools';
+import { getStakePools, StakePool } from 'src/api/stakePools';
 import { ExternallinkIcon } from 'src/components/icons';
 import { Layout } from 'src/components/Layout';
 import { Partner, PARTNERS } from 'src/data/partners';
 
-type Props = {
-  liveStake: Record<string, number>;
-  totalStake: number;
-};
-
-export default function DashboardPage({ liveStake, totalStake }: Props): React.ReactElement {
+export default function DashboardPage({ liveStake, source, totalStake }: StakePool): React.ReactElement {
   function formatLiveStake(s: number | undefined): string {
     if (s === undefined) {
       return '-';
@@ -39,10 +34,12 @@ export default function DashboardPage({ liveStake, totalStake }: Props): React.R
             <div className="flex flex-col">
               <div className="text-lg font-bold">Smallest pool now (25% bonus): {sortedPartner[0]?.ticker}</div>
               <div className="text-lg">Total stake: {formatLiveStake(totalStake)} ₳</div>
-              <div className="hidden mt-2 text-base opacity-60 sm:block">
-                Live stake data is pulled from pool.pm API so there might be a time lag. In case of pools having live
-                stake close to each other, it is best to consult other websites before staking.
-              </div>
+              {source === 'PoolPm' && (
+                <div className="hidden mt-2 text-base opacity-60 sm:block">
+                  Because Minswap server is down, live stake is pulled from pool.pm instead. In case of pools having
+                  live stake close to each other, it is best to consult other websites before staking.
+                </div>
+              )}
             </div>
           </div>
 
@@ -106,11 +103,11 @@ export default function DashboardPage({ liveStake, totalStake }: Props): React.R
   );
 }
 
-export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
-  const [liveStake, totalStake] = await getStakePools();
+export async function getStaticProps(): Promise<GetStaticPropsResult<StakePool>> {
+  const stakePool: StakePool = await getStakePools();
 
   return {
-    props: { liveStake, totalStake },
+    props: stakePool,
     revalidate: 60, // Cache for 1 minute
   };
 }
