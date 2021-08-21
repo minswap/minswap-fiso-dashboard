@@ -2,16 +2,12 @@ import * as React from 'react';
 import { GetStaticPropsResult } from 'next';
 import Image from 'next/image';
 
-import { getLiveStake } from 'src/api/poolpm';
+import { getStakePools, StakePool } from 'src/api/stakePools';
 import { ExternallinkIcon } from 'src/components/icons';
 import { Layout } from 'src/components/Layout';
 import { Partner, PARTNERS } from 'src/data/partners';
 
-type Props = {
-  liveStake: Record<string, number>;
-};
-
-export default function DashboardPage({ liveStake }: Props): React.ReactElement {
+export default function DashboardPage({ liveStake, source, totalStake }: StakePool): React.ReactElement {
   function formatLiveStake(s: number | undefined): string {
     if (s === undefined) {
       return '-';
@@ -20,8 +16,8 @@ export default function DashboardPage({ liveStake }: Props): React.ReactElement 
   }
 
   function compareFn(a: Partner, b: Partner): number {
-    const x = liveStake[a.id];
-    const y = liveStake[b.id];
+    const x = liveStake[a.ticker];
+    const y = liveStake[b.ticker];
     if (x === undefined || y === undefined) {
       return 0;
     }
@@ -29,20 +25,21 @@ export default function DashboardPage({ liveStake }: Props): React.ReactElement 
   }
 
   const sortedPartner: Partner[] = PARTNERS.sort(compareFn);
-  const totalStake: number = Object.values(liveStake).reduce((sum, x) => sum + x, 0);
 
   return (
     <Layout>
       <div className="flex-1 w-full px-2 lg:w-auto lg:pl-8 lg:px-0">
-        <div className="px-4 sm:px-8 flex flex-col overflow-y-scroll bg-white divide-y shadow-xl max-h-[85vh] divide-opacity-10 divide-secondary rounded-3xl">
+        <div className="px-4 sm:px-8 flex flex-col overflow-y-scroll bg-white divide-y shadow-xl max-h-[84vh] divide-opacity-10 divide-secondary rounded-3xl">
           <div className={'sticky top-0 left-0 right-0 z-10 pt-5 space-y-2 bg-white xl:space-y-0 pb-7'}>
             <div className="flex flex-col">
               <div className="text-lg font-bold">Smallest pool now (25% bonus): {sortedPartner[0]?.ticker}</div>
               <div className="text-lg">Total stake: {formatLiveStake(totalStake)} ₳</div>
-              <div className="hidden mt-2 text-base opacity-60 sm:block">
-                Live stake data is pulled from pool.pm API so there might be a time lag. In case of pools having live
-                stake close to each other, it is best to consult other websites before staking.
-              </div>
+              {source === 'PoolPm' && (
+                <div className="hidden mt-2 text-base opacity-60 sm:block">
+                  Because Minswap server is down, live stake is pulled from pool.pm instead. In case of pools having
+                  live stake close to each other, it is best to consult other websites before staking.
+                </div>
+              )}
             </div>
           </div>
 
@@ -72,7 +69,7 @@ export default function DashboardPage({ liveStake }: Props): React.ReactElement 
                   <td>
                     <div className="flex flex-col px-3">
                       <div className="opacity-60">Live Stake</div>
-                      <div>{formatLiveStake(liveStake[p.id])}</div>
+                      <div>{formatLiveStake(liveStake[p.ticker])}</div>
                     </div>
                   </td>
 
@@ -95,15 +92,22 @@ export default function DashboardPage({ liveStake }: Props): React.ReactElement 
           </table>
         </div>
       </div>
+
+      <style jsx>{`
+        *::-webkit-scrollbar-track {
+          margin-top: 12px;
+          margin-bottom: 12px;
+        }
+      `}</style>
     </Layout>
   );
 }
 
-export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
-  const liveStake = await getLiveStake();
+export async function getStaticProps(): Promise<GetStaticPropsResult<StakePool>> {
+  const stakePool: StakePool = await getStakePools();
 
   return {
-    props: { liveStake },
+    props: stakePool,
     revalidate: 60, // Cache for 1 minute
   };
 }
