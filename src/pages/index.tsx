@@ -10,12 +10,7 @@ export default function DashboardPage(): React.ReactElement {
   const [stakePool, setStakePool] = React.useState<StakePool>();
 
   React.useEffect(() => {
-    async function fetchStakePools() {
-      const response: StakePool = await getStakePools();
-      setStakePool(response);
-    }
-
-    fetchStakePools();
+    getStakePools().then((res: StakePool) => setStakePool(res));
   }, []);
 
   function formatLiveStake(s: number | undefined): string {
