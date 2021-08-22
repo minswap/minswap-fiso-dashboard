@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { GetStaticPropsResult } from 'next';
 import Image from 'next/image';
 
 import { getStakePools, StakePool } from 'src/api/stakePools';
@@ -7,7 +6,18 @@ import { ExternallinkIcon } from 'src/components/icons';
 import { Layout } from 'src/components/Layout';
 import { Partner, PARTNERS } from 'src/data/partners';
 
-export default function DashboardPage({ liveStake, source, totalStake }: StakePool): React.ReactElement {
+export default function DashboardPage(): React.ReactElement {
+  const [stakePool, setStakePool] = React.useState<StakePool>();
+
+  React.useEffect(() => {
+    async function fetchStakePools() {
+      const response: StakePool = await getStakePools();
+      setStakePool(response);
+    }
+
+    fetchStakePools();
+  }, []);
+
   function formatLiveStake(s: number | undefined): string {
     if (s === undefined) {
       return '-';
@@ -16,8 +26,8 @@ export default function DashboardPage({ liveStake, source, totalStake }: StakePo
   }
 
   function compareFn(a: Partner, b: Partner): number {
-    const x = liveStake[a.ticker];
-    const y = liveStake[b.ticker];
+    const x = stakePool?.liveStake[a.ticker];
+    const y = stakePool?.liveStake[b.ticker];
     if (x === undefined || y === undefined) {
       return 0;
     }
@@ -33,8 +43,8 @@ export default function DashboardPage({ liveStake, source, totalStake }: StakePo
           <div className={'sticky top-0 left-0 right-0 z-10 pt-5 space-y-2 bg-white xl:space-y-0 pb-7'}>
             <div className="flex flex-col">
               <div className="text-lg font-bold">Smallest pool now (25% bonus): {sortedPartner[0]?.ticker}</div>
-              <div className="text-lg">Total stake: {formatLiveStake(totalStake)} ₳</div>
-              {source === 'PoolPm' && (
+              <div className="text-lg">Total stake: {formatLiveStake(stakePool?.totalStake)} ₳</div>
+              {stakePool?.source === 'PoolPm' && (
                 <div className="hidden mt-2 text-base opacity-60 sm:block">
                   Because Minswap server is down, live stake is pulled from pool.pm instead. In case of pools having
                   live stake close to each other, it is best to consult other websites before staking.
@@ -69,7 +79,8 @@ export default function DashboardPage({ liveStake, source, totalStake }: StakePo
                   <td>
                     <div className="flex flex-col px-3">
                       <div className="opacity-60">Live Stake</div>
-                      <div>{formatLiveStake(liveStake[p.ticker])}</div>
+
+                      <div>{formatLiveStake(stakePool?.liveStake[p.ticker])}</div>
                     </div>
                   </td>
 
@@ -101,13 +112,4 @@ export default function DashboardPage({ liveStake, source, totalStake }: StakePo
       `}</style>
     </Layout>
   );
-}
-
-export async function getStaticProps(): Promise<GetStaticPropsResult<StakePool>> {
-  const stakePool: StakePool = await getStakePools();
-
-  return {
-    props: stakePool,
-    revalidate: 60, // Cache for 1 minute
-  };
 }
