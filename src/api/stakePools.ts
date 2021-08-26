@@ -16,7 +16,7 @@ type Response = {
 };
 
 export async function getStakePools(): Promise<StakePool> {
-  const response = await fetch('https://dev.api.minswap.org/fiso/stake-pools');
+  const response = await fetch('https://api.minswap.org/fiso/stake-pools');
   if (response.ok) {
     const body: Response = await response.json();
     const totalStake: number = body.totalStake / 1_000_000;
