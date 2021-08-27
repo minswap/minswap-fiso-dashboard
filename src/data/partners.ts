@@ -1,3 +1,5 @@
+import eusklLogo from 'src/assets/partners/euskl.png';
+
 export interface Partner {
   id: string;
   ticker: string;
@@ -81,6 +83,7 @@ export const PARTNERS: Partner[] = [
     description:
       "We are the 1st Basque Country's Cardano Stake Pool! Our Mission is simple: Cardano Mission! We also are proud members of Cardano Single Pool Alliance (CSPA) and we are a 0% margin fee pool, powered and maintained by IT professionals.",
     twitter: 'euskalstakepool',
+    logo: eusklLogo,
   },
   {
     id: 'eeb180952144eaf1aa5ff27a19322a5560e027ca1510bae10ec2e76a',
