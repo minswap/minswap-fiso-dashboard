@@ -19,16 +19,20 @@ export async function getStakePools(): Promise<StakePool> {
   const response = await fetch('https://api.minswap.org/fiso/stake-pools');
   if (response.ok) {
     const body: Response = await response.json();
-    const totalStake: number = body.totalStake / 1_000_000;
+    let totalStake = 0;
     const liveStake: Record<string, number> = body.data.reduce<Record<string, number>>((map, res) => {
-      map[res.name] = res.liveStake / 1_000_000;
+      const liveStake = res.liveStake / 1_000_000;
+      map[res.name] = liveStake;
+      totalStake += liveStake;
       return map;
     }, {});
-    return {
-      totalStake,
-      source: 'MinService',
-      liveStake,
-    };
+    if (totalStake > 0) {
+      return {
+        totalStake,
+        source: 'MinService',
+        liveStake,
+      };
+    }
   }
 
   // backup when minswap service has problem
