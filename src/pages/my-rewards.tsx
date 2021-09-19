@@ -4,8 +4,10 @@ import { getRewards, Reward } from 'src/api/rewards';
 import { Button } from 'src/components/Button';
 import { Input } from 'src/components/Input';
 import { Layout } from 'src/components/Layout';
+import { paymentAddrToStakeAddr } from 'src/utils';
 
-const addrRegExp = new RegExp('^stake[a-z0-9]{54}$|^addr[a-z0-9]{99}$');
+const paymentAddrRegExp = new RegExp('^addr[a-z0-9]{99}$');
+const stakeAddrRegExp = new RegExp('^stake[a-z0-9]{54}$');
 
 export default function DashboardPage(): React.ReactElement {
   const [address, setAddress] = React.useState<string>('');
@@ -15,18 +17,37 @@ export default function DashboardPage(): React.ReactElement {
   const [mintReward, setMintReward] = React.useState<number>(0);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  function handleGetRewards() {
+  // SAI
+  React.useMemo(() => {
+    rewards?.map((reward: Reward) => {
+      setMinReward(minReward + reward.amountMin);
+      setMintReward(mintReward + reward.amountMint);
+    });
+  }, [rewards]);
+
+  // ĐÚNG
+  // [totalMin, totalMinT] = React.useMemo(() => {
+  //   // tính totalMin và totalMinT ở đây từ rewards
+  //   // bỏ cái state trên kia đi
+  //   return totalMin, totalMinT;
+  // }, [rewards]);
+
+  async function handleGetRewards() {
     setRewards([]);
     setIsLoading(true);
+    setErrMessage('');
     try {
-      getRewards(address).then((res) => {
-        setRewards(res);
-        res?.map((reward: Reward) => {
-          setMinReward(minReward + reward.amountMin);
-          setMintReward(mintReward + reward.amountMint);
-        });
-      });
-    } catch (error) {
+      let stakeAddr = '';
+      if (paymentAddrRegExp.test(address)) {
+        stakeAddr = await paymentAddrToStakeAddr(address);
+      } else if (stakeAddrRegExp.test(address)) {
+        stakeAddr = address;
+      } else {
+        throw new Error('Address must be payment address or stake address');
+      }
+      const rewards = await getRewards(stakeAddr);
+      setRewards(rewards);
+    } catch (error: any) {
       setErrMessage(error.message);
     } finally {
       setIsLoading(false);
@@ -35,12 +56,6 @@ export default function DashboardPage(): React.ReactElement {
 
   async function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === 'Enter') {
-      setErrMessage('');
-      // TODO: if input value is wallet address then convert to stake address
-      if (!addrRegExp.test(address)) {
-        setErrMessage('Invalid address');
-        return;
-      }
       handleGetRewards();
     }
   }
