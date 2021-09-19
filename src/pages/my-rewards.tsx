@@ -4,7 +4,8 @@ import { getRewards, Reward } from 'src/api/rewards';
 import { Button } from 'src/components/Button';
 import { Input } from 'src/components/Input';
 import { Layout } from 'src/components/Layout';
-import { RustModule } from 'src/rust-module';
+
+const addrRegExp = new RegExp('^stake[a-z0-9]{54}$|^addr[a-z0-9]{99}$');
 
 export default function DashboardPage(): React.ReactElement {
   const [address, setAddress] = React.useState<string>('');
@@ -14,24 +15,32 @@ export default function DashboardPage(): React.ReactElement {
   const [mintReward, setMintReward] = React.useState<number>(0);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  React.useMemo(() => {
-    rewards?.map((reward: Reward) => {
-      setMinReward(minReward + reward.amountMin);
-      setMintReward(mintReward + reward.amountMint);
-    });
-  }, [rewards]);
-
   function handleGetRewards() {
     setRewards([]);
     setIsLoading(true);
-    getRewards(address)
-      .then((res) => setRewards(res))
-      .finally(() => setIsLoading(false));
+    try {
+      getRewards(address).then((res) => {
+        setRewards(res);
+        res?.map((reward: Reward) => {
+          setMinReward(minReward + reward.amountMin);
+          setMintReward(mintReward + reward.amountMint);
+        });
+      });
+    } catch (error) {
+      setErrMessage(error.message);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   async function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === 'Enter') {
-      // TODO: validate address, if input value is wallet address then convert to stake address
+      setErrMessage('');
+      // TODO: if input value is wallet address then convert to stake address
+      if (!addrRegExp.test(address)) {
+        setErrMessage('Invalid address');
+        return;
+      }
       handleGetRewards();
     }
   }
@@ -50,7 +59,7 @@ export default function DashboardPage(): React.ReactElement {
             <Input
               className="w-[460px]"
               label="Enter your address"
-              placeholder="Enter your stake address"
+              placeholder="Enter your payment address or stake address"
               value={address}
               onChange={handleChange}
               onKeyDown={handleKeyDown}
@@ -74,8 +83,8 @@ export default function DashboardPage(): React.ReactElement {
               <th className="py-3">Epoch</th>
               <th>Pool</th>
               <th>Total delegate</th>
-              <th>Min reward</th>
-              <th>Mint reward</th>
+              <th>MIN reward</th>
+              <th>MINt reward</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-secondary divide-opacity-10">
