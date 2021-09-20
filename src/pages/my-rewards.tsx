@@ -13,24 +13,17 @@ export default function DashboardPage(): React.ReactElement {
   const [address, setAddress] = React.useState<string>('');
   const [errMessage, setErrMessage] = React.useState<string>('');
   const [rewards, setRewards] = React.useState<Reward[]>();
-  const [minReward, setMinReward] = React.useState<number>(0);
-  const [mintReward, setMintReward] = React.useState<number>(0);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  // SAI
-  React.useMemo(() => {
-    rewards?.map((reward: Reward) => {
-      setMinReward(minReward + reward.amountMin);
-      setMintReward(mintReward + reward.amountMint);
+  const [totalMinReward, totalMintReward] = React.useMemo(() => {
+    let totalMin = 0,
+      totalMint = 0;
+    rewards?.forEach((item) => {
+      totalMin += item.amountMin;
+      totalMint += item.amountMint;
     });
+    return [totalMin, totalMint];
   }, [rewards]);
-
-  // ĐÚNG
-  // [totalMin, totalMinT] = React.useMemo(() => {
-  //   // tính totalMin và totalMinT ở đây từ rewards
-  //   // bỏ cái state trên kia đi
-  //   return totalMin, totalMinT;
-  // }, [rewards]);
 
   async function handleGetRewards() {
     setRewards([]);
@@ -115,8 +108,8 @@ export default function DashboardPage(): React.ReactElement {
             <tr className="font-bold">
               <td colSpan={2}></td>
               <td className="pt-3">Total</td>
-              <td>{minReward.toFixed(2)}</td>
-              <td>{mintReward.toFixed(2)}</td>
+              <td>{totalMinReward.toFixed(2)}</td>
+              <td>{totalMintReward.toFixed(2)}</td>
             </tr>
           </tbody>
         </table>
