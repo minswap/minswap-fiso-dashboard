@@ -56,10 +56,11 @@ module.exports = {
   },
   variants: {
     extend: {
-      textOpacity: ['active', 'dark'],
+      textOpacity: ['active'],
       backgroundColor: ['checked'],
       borderColor: ['checked'],
       textColor: ['checked'],
+      tableLayout: ['hover', 'focus'],
     },
   },
   plugins: [],
