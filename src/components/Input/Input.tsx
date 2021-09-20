@@ -11,7 +11,7 @@ export const Input = React.forwardRef<HTMLInputElement, Props>(function Input(
   ref,
 ): React.ReactElement<Props> {
   return (
-    <div>
+    <div className="flex-grow lg:flex-none">
       {label && <div className="text-sm pb-[6px] pl-[10px]">{label}</div>}
       <div
         className={classnames(

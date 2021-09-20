@@ -59,13 +59,13 @@ export default function DashboardPage(): React.ReactElement {
 
   return (
     <Layout>
-      <div className="flex-1 w-full px-8 py-6 mx-8 bg-white divide-y shadow-md divide-secondary divide-opacity-10 rounded-3xl lg:w-auto">
-        <div className="pb-5 text-xl font-bold">My FISO rewards</div>
+      <div className="flex-1 w-full px-3 py-4 mx-5 bg-white divide-y shadow-md lg:mx-8 lg:py-6 lg:px-8 divide-secondary divide-opacity-10 rounded-3xl lg:w-auto">
+        <div className="pb-3 text-xl font-bold lg:pb-5">My FISO rewards</div>
 
-        <div className="pb-7 pt-7">
-          <div className="flex items-end gap-x-5">
+        <div className="py-4 lg:py-7">
+          <div className="flex items-end lg:gap-x-5 gap-x-2">
             <Input
-              className="w-[460px]"
+              className="lg:w-[460px]"
               label="Enter your address"
               placeholder="Enter your payment address or stake address"
               value={address}
@@ -73,7 +73,7 @@ export default function DashboardPage(): React.ReactElement {
               onKeyDown={handleKeyDown}
             />
             <Button
-              className="px-8"
+              className="px-6 lg:px-8"
               disabled={address.length < 1}
               isLoading={isLoading}
               size="sm"
@@ -108,8 +108,8 @@ export default function DashboardPage(): React.ReactElement {
             <tr className="font-bold">
               <td colSpan={2}></td>
               <td className="pt-3">Total</td>
-              <td>{totalMinReward.toFixed(2)}</td>
-              <td>{totalMintReward.toFixed(2)}</td>
+              <td className="pt-3">{totalMinReward.toFixed(2)}</td>
+              <td className="pt-3">{totalMintReward.toFixed(2)}</td>
             </tr>
           </tbody>
         </table>

@@ -61,6 +61,7 @@ module.exports = {
       borderColor: ['checked'],
       textColor: ['checked'],
       tableLayout: ['hover', 'focus'],
+      flexGrow: ['hover', 'focus'],
     },
   },
   plugins: [],
