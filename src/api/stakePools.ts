@@ -16,7 +16,7 @@ type Response = {
 };
 
 async function getStakePoolsFromMinswap(): Promise<StakePool> {
-  const response = await fetch('https://api.minswap.org/fiso/stake-pools');
+  const response = await fetch('https://api-mainnet.minswap.org/fiso/stake-pools');
   if (!response.ok) {
     try {
       const data = await response.json();
