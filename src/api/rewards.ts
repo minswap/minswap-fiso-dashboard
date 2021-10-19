@@ -6,6 +6,7 @@ export type Reward = {
   point: number;
   amountMin: number;
   amountMint: number;
+  hasSmallestPoolBonus: boolean;
 };
 
 export async function getRewards(stakeAddr: string): Promise<Reward[]> {

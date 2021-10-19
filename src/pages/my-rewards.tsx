@@ -88,34 +88,44 @@ export default function DashboardPage(): React.ReactElement {
           {errMessage && <span className="w-full text-sm text-left text-redOrange pl-[10px]">{errMessage}</span>}
         </div>
 
-        <table className="w-full text-center table-auto">
-          <thead>
-            <tr className="border-b border-secondary border-opacity-10">
-              <th className="py-3">Epoch</th>
-              <th>Pool</th>
-              <th>Total delegate</th>
-              <th>MIN reward</th>
-              <th>MINt reward</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-secondary divide-opacity-10">
-            {rewards?.map((reward: Reward) => (
-              <tr key={reward.epoch}>
-                <td className="py-3">{reward.epoch}</td>
-                <td>{reward.poolName}</td>
-                <td>{reward.amountDelegate.toFixed(2)}</td>
-                <td>{reward.amountMin.toFixed(2)}</td>
-                <td>{reward.amountMint.toFixed(2)}</td>
+        {totalMinReward !== 0 && (
+          <table className="w-full text-center table-auto">
+            <thead>
+              <tr className="font-bold border-b">
+                <td colSpan={3}></td>
+                <td className="py-3">Total</td>
+                <td className="py-3">{totalMinReward.toFixed(2)}</td>
+                <td className="py-3">{totalMintReward.toFixed(2)}</td>
               </tr>
-            ))}
-            <tr className="font-bold">
-              <td colSpan={2}></td>
-              <td className="pt-3">Total</td>
-              <td className="pt-3">{totalMinReward.toFixed(2)}</td>
-              <td className="pt-3">{totalMintReward.toFixed(2)}</td>
-            </tr>
-          </tbody>
-        </table>
+              <tr className="border-b border-secondary border-opacity-10">
+                <th className="py-3">Epoch</th>
+                <th>Pool</th>
+                <th>Total delegate</th>
+                <th>Has bonus</th>
+                <th>MIN reward</th>
+                <th>MINt reward</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-secondary divide-opacity-10">
+              {rewards?.map((reward: Reward) => (
+                <tr key={reward.epoch}>
+                  <td className="py-3">{reward.epoch}</td>
+                  <td>{reward.poolName}</td>
+                  <td>{reward.amountDelegate.toFixed(2)}</td>
+                  <td>{reward.hasSmallestPoolBonus ? 'Yes' : 'No'}</td>
+                  <td>{reward.amountMin.toFixed(2)}</td>
+                  <td>{reward.amountMint.toFixed(2)}</td>
+                </tr>
+              ))}
+              <tr className="font-bold">
+                <td colSpan={3}></td>
+                <td className="pt-3">Total</td>
+                <td className="pt-3">{totalMinReward.toFixed(2)}</td>
+                <td className="pt-3">{totalMintReward.toFixed(2)}</td>
+              </tr>
+            </tbody>
+          </table>
+        )}
       </div>
     </Layout>
   );
