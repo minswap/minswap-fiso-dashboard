@@ -63,6 +63,12 @@ export default function DashboardPage(): React.ReactElement {
         <div className="pb-3 lg:pb-5">
           <div className="text-xl font-bold">My FISO rewards</div>
           <div className="pt-2 text-base opacity-60">Reward calculation is delayed by 2 epochs.</div>
+          <div className="text-base opacity-60">
+            You get the 25% bonus
+            <span className="opacity-100"> 🔥 </span>
+            from the 11<sup>th</sup> epoch onwards (inclusive) and we will be distributed alongside the airdrop at the
+            end of the FISO.
+          </div>
         </div>
 
         <div className="py-4 lg:py-7">
@@ -92,7 +98,7 @@ export default function DashboardPage(): React.ReactElement {
           <table className="w-full text-center table-auto">
             <thead>
               <tr className="font-bold border-b">
-                <td colSpan={3}></td>
+                <td colSpan={2}></td>
                 <td className="py-3">Total</td>
                 <td className="py-3">{totalMinReward.toFixed(2)}</td>
                 <td className="py-3">{totalMintReward.toFixed(2)}</td>
@@ -101,7 +107,6 @@ export default function DashboardPage(): React.ReactElement {
                 <th className="py-3">Epoch</th>
                 <th>Pool</th>
                 <th>Total delegate</th>
-                <th>Has bonus</th>
                 <th>MIN reward</th>
                 <th>MINt reward</th>
               </tr>
@@ -109,16 +114,18 @@ export default function DashboardPage(): React.ReactElement {
             <tbody className="divide-y divide-secondary divide-opacity-10">
               {rewards?.map((reward: Reward) => (
                 <tr key={reward.epoch}>
-                  <td className="py-3">{reward.epoch}</td>
+                  <td className="py-3">
+                    {reward.hasSmallestPoolBonus && `🔥`}
+                    {reward.epoch}
+                  </td>
                   <td>{reward.poolName}</td>
                   <td>{reward.amountDelegate.toFixed(2)}</td>
-                  <td>{reward.hasSmallestPoolBonus ? 'Yes' : 'No'}</td>
                   <td>{reward.amountMin.toFixed(2)}</td>
                   <td>{reward.amountMint.toFixed(2)}</td>
                 </tr>
               ))}
               <tr className="font-bold">
-                <td colSpan={3}></td>
+                <td colSpan={2}></td>
                 <td className="pt-3">Total</td>
                 <td className="pt-3">{totalMinReward.toFixed(2)}</td>
                 <td className="pt-3">{totalMintReward.toFixed(2)}</td>
