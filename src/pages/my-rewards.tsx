@@ -115,8 +115,7 @@ export default function DashboardPage(): React.ReactElement {
               {rewards?.map((reward: Reward) => (
                 <tr key={reward.epoch}>
                   <td className="py-3">
-                    {reward.hasSmallestPoolBonus && `🔥`}
-                    {reward.epoch}
+                    `${reward.epoch}${reward.hasSmallestPoolBonus ? ` 🔥` : ``}`
                   </td>
                   <td>{reward.poolName}</td>
                   <td>{reward.amountDelegate.toFixed(2)}</td>
