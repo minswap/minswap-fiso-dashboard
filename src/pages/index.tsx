@@ -39,6 +39,9 @@ export default function DashboardPage(): React.ReactElement {
             <div className="flex flex-col">
               <div className="text-lg font-bold">Smallest pool now (25% bonus): {sortedPartner[0]?.ticker}</div>
               <div className="text-lg">Total stake: {formatLiveStake(stakePool?.totalStake)} ₳</div>
+              <div className="hidden mt-2 text-base opacity-60 sm:block">
+                Wondering which pool to stake? Choose the smallest pool and support decentralizing the Cardano network!
+              </div>
               {stakePool?.source === 'PoolPm' && (
                 <div className="hidden mt-2 text-base opacity-60 sm:block">
                   Because Minswap server is down, live stake is pulled from pool.pm instead. In case of pools having
