@@ -22,7 +22,7 @@ export default function DashboardPage(): React.ReactElement {
       totalMin += item.amountMin;
       totalMint += item.amountMint;
     });
-    return [totalMin, totalMint];
+    return [totalMin / 1_000_000, totalMint / 1_000_000];
   }, [rewards]);
 
   async function handleGetRewards() {
@@ -115,12 +115,13 @@ export default function DashboardPage(): React.ReactElement {
               {rewards?.map((reward: Reward) => (
                 <tr key={reward.epoch}>
                   <td className="py-3">
-                  {reward.epoch}{reward.hasSmallestPoolBonus ? ` 🔥` : ``}
+                    {reward.epoch}
+                    {reward.hasSmallestPoolBonus ? ` 🔥` : ``}
                   </td>
                   <td>{reward.poolName}</td>
-                  <td>{reward.amountDelegate.toFixed(2)}</td>
-                  <td>{reward.amountMin.toFixed(2)}</td>
-                  <td>{reward.amountMint.toFixed(2)}</td>
+                  <td>{(reward.amountDelegate / 1_000_000).toFixed(2)}</td>
+                  <td>{(reward.amountMin / 1_000_000).toFixed(2)}</td>
+                  <td>{(reward.amountMint / 1_000_000).toFixed(2)}</td>
                 </tr>
               ))}
               <tr className="font-bold">
