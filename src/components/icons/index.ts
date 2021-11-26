@@ -22,6 +22,7 @@ export * from './FarmIcon';
 export * from './GithubIcon';
 export * from './InfoIcon';
 export * from './LiquidityIcon';
+export * from './LogoFilled';
 export * from './LogoIcon';
 export * from './MediumIcon';
 export * from './MenuCollapseIcon';
