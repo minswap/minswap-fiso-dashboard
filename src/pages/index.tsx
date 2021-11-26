@@ -19,10 +19,12 @@ export default function ThankyouPage(): React.ReactElement {
             Thank you for participating in the FISO.
             <br />
             We are working on the final epoch&apos;s rewards and the claiming system. The system will go live on testnet
-            on December 7th and mainnet on December 13th.&nbsp;
+            on December 7<sup>th</sup> and mainnet on December 13<sup>th</sup>.&nbsp;
             <a
               className="text-primary hover:underline"
               href="https://medium.com/minswap/fair-iso-application-for-stake-pool-operators-begins-now-e6d563f85eec"
+              rel="noopener noreferrer"
+              target="_blank"
             >
               Read more
             </a>
