@@ -22,7 +22,7 @@ export default function ThankyouPage(): React.ReactElement {
             on December 7<sup>th</sup> and mainnet on December 13<sup>th</sup>.&nbsp;
             <a
               className="text-primary hover:underline"
-              href="https://medium.com/minswap/fair-iso-application-for-stake-pool-operators-begins-now-e6d563f85eec"
+              href="https://medium.com/minswap/fiso-has-ended-whats-next-c29b3cca25d5"
               rel="noopener noreferrer"
               target="_blank"
             >
