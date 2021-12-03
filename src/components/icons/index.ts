@@ -41,3 +41,4 @@ export * from './SunIcon';
 export * from './SwapIcon';
 export * from './SyncIcon';
 export * from './TwitterIcon';
+export * from './CopyIcon';
