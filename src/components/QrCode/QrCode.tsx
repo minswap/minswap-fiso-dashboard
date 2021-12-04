@@ -4,7 +4,7 @@ import QRCodeStyling from 'qr-code-styling';
 const qrCode = new QRCodeStyling({
   width: 150,
   height: 150,
-  //   image: '../assets/minswap.png',
+  // image: '../minswap.png',
   dotsOptions: {
     color: '#0f1743',
     type: 'dots',

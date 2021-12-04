@@ -109,7 +109,7 @@ export default function DashboardPage(): React.ReactElement {
                       </span>
                     )}
                   </td>
-                  <td rowSpan={2} className="pt-4 align-middle">
+                  <td className="pt-4 align-middle" rowSpan={2}>
                     <Button size="sm" variant="light" onClick={() => setIsOpenInstruction(true)}>
                       Claim now
                     </Button>

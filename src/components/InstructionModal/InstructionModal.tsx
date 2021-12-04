@@ -1,8 +1,9 @@
 import * as React from 'react';
 import dynamic from 'next/dynamic';
-import { Modal, ModalContent, ModalTitle } from '../Modal';
+
 import { IconButton } from '../IconButton';
 import { CloseIcon, CopyIcon } from '../icons';
+import { Modal, ModalContent, ModalTitle } from '../Modal';
 import { Tooltip } from '../Tooltip';
 
 interface Props {
