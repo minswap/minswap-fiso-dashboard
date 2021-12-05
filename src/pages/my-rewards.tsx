@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { EpochReward, getReward, Reward } from 'src/api/rewards';
 import { Button } from 'src/components/Button';
+import { ExternallinkIcon } from 'src/components/icons';
 import { Input } from 'src/components/Input';
 import { InstructionModal } from 'src/components/InstructionModal';
 import { Layout } from 'src/components/Layout';
@@ -90,10 +91,10 @@ export default function DashboardPage(): React.ReactElement {
           {reward && (
             <table className="w-full text-center table-auto">
               <tbody>
-                <tr>
-                  <td className="pt-4 font-bold">MIN</td>
-                  <td className="pt-4 font-bold text-right">{(reward.min.amount / oneMillion).toFixed(2)}</td>
-                  <td className="pt-4">
+                <tr className="border-b border-secondary border-opacity-10">
+                  <td className="pt-4 pb-2 font-bold">MIN</td>
+                  <td className="pt-4 pb-2 font-bold text-right">{(reward.min.amount / oneMillion).toFixed(2)}</td>
+                  <td className="pt-4 pb-2">
                     {reward.min.isClaimed ? (
                       <a
                         className="font-semibold text-primary dark:text-white"
@@ -109,25 +110,33 @@ export default function DashboardPage(): React.ReactElement {
                       </span>
                     )}
                   </td>
-                  <td className="pt-4 align-middle" rowSpan={2}>
-                    <Button size="sm" variant="light" onClick={() => setIsOpenInstruction(true)}>
-                      Claim now
-                    </Button>
+                  <td className="py-4 align-middle" rowSpan={2}>
+                    <div className="flex justify-center">
+                      <Button size="sm" variant="light" onClick={() => setIsOpenInstruction(true)}>
+                        Claim now
+                      </Button>
+                    </div>
                   </td>
                 </tr>
-                <tr>
-                  <td className="font-bold">MINt</td>
-                  <td className="font-bold text-right">{(reward.mint.amount / oneMillion).toFixed(2)}</td>
-                  <td>
+                <tr className="border-b border-secondary border-opacity-10">
+                  <td className="pt-2 pb-4 font-bold">MINt</td>
+                  <td className="pt-2 pb-4 font-bold text-right">{(reward.mint.amount / oneMillion).toFixed(2)}</td>
+                  <td className="pt-2 pb-4">
                     {reward.mint.isClaimed ? (
-                      <a
-                        className="font-semibold text-primary dark:text-white"
-                        href={`https://testnet.cardanoscan.io/transaction/${reward.mint.txID}`}
-                        rel="noreferrer"
-                        target="_blank"
-                      >
-                        View on Cardanoscan
-                      </a>
+                      <div className="flex items-center justify-center font-bold gap-x-1">
+                        <span>Claimed</span>
+                        <a
+                          className="font-semibold text-primary dark:text-white"
+                          href={`https://testnet.cardanoscan.io/transaction/${reward.mint.txID}`}
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          <div className="flex items-center gap-x-1">
+                            (View on Cardanoscan
+                            <ExternallinkIcon />)
+                          </div>
+                        </a>
+                      </div>
                     ) : (
                       <span>
                         Claimable from <b>7 Dec 2022</b> to <b>3 Jan 2022</b>
@@ -141,7 +150,7 @@ export default function DashboardPage(): React.ReactElement {
         </div>
 
         {reward && (
-          <div className="px-3 py-4 m-5 bg-white divide-y shadow-md lg:mx-8 lg:py-6 lg:px-8 divide-secondary divide-opacity-10 rounded-3xl ">
+          <div className="px-3 py-4 m-5 bg-white divide-y shadow-md lg:mx-8 lg:py-6 lg:px-8 divide-secondary divide-opacity-10 rounded-3xl">
             <table className="w-full text-center table-auto">
               <thead>
                 <tr className="border-b border-secondary border-opacity-10">

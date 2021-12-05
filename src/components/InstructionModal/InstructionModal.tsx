@@ -44,14 +44,35 @@ export function InstructionModal({ isOpen, onClose }: Props): React.ReactElement
         </div>
 
         <div className="pt-5">
-          <DynamicQrCode paymentAddress={MIN_WALLET} />
+          <div className="float-left mr-4">
+            <DynamicQrCode paymentAddress={MIN_WALLET} />
+          </div>
+
+          <div>
+            <span>Before claiming the MIN tokens please ensure the following:</span>
+            <ul>
+              <li>
+                - You are using a <b>Shell-Era</b> wallet.
+              </li>
+              <li>
+                - Don't using <b>Byron-Era</b> wallet, you will not receive MIN tokens.
+              </li>
+              <li>
+                - Send <b>exactly</b> 2 ADA to the Min's wallet with the wallet you use to stake MIN tokens before. Your
+                MINt and 1.5 ADA will be sent back to your wallet shortly after.
+              </li>
+            </ul>
+            <div>
+              <b>Note:</b> Any amount above or below 2 ADA sent will be treated for the Min team.
+            </div>
+          </div>
         </div>
 
-        <div className="flex items-center justify-between px-5 py-3 overflow-x-auto bg-coolGray-100 rounded-2xl md:overflow-x-hidden gap-x-4">
-          <span className="overflow-hidden whitespace-nowrap overflow-ellipsis">{MIN_WALLET}</span>
+        <div className="flex items-center px-4 py-2 bg-opacity-50 border-none bg-solitude rounded-2xl gap-x-2">
+          <div className="overflow-hidden whitespace-nowrap overflow-ellipsis">{MIN_WALLET}</div>
 
-          <Tooltip content="Copied" placement="bottom" visible={showCopiedTooltip}>
-            <button className="p-3 text-sm bg-white rounded-xl md:text-base" onClick={handleCopy}>
+          <Tooltip content="Copied" placement="top" visible={showCopiedTooltip}>
+            <button className="p-3 text-sm align-middle bg-white rounded-xl" onClick={handleCopy}>
               <CopyIcon />
             </button>
           </Tooltip>
