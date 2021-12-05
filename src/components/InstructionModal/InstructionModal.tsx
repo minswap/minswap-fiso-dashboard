@@ -34,7 +34,7 @@ export function InstructionModal({ isOpen, onClose }: Props): React.ReactElement
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalContent className="p-5 max-w-lg flex flex-col overflow-y-auto gap-y-6 max-h-[50rem] divide-y divide-opacity-10 divide-secondary">
+      <ModalContent className="p-5 max-w-lg flex flex-col overflow-y-auto gap-y-4 max-h-[50rem] divide-y divide-opacity-10 divide-secondary">
         <div className="flex items-center px-2 gap-x-2">
           <ModalTitle className="flex-1 text-lg font-bold text-left">Minwallet information</ModalTitle>
 
@@ -44,22 +44,22 @@ export function InstructionModal({ isOpen, onClose }: Props): React.ReactElement
         </div>
 
         <div className="pt-5">
-          <div className="float-left mr-4">
+          <div className="float-left mr-4 border">
             <DynamicQrCode paymentAddress={MIN_WALLET} />
           </div>
 
           <div>
             <span>Before claiming the MIN tokens please ensure the following:</span>
-            <ul>
+            <ul className="list-disc list-inside">
               <li>
-                - You are using a <b>Shell-Era</b> wallet.
+                You are using a <b>Shelly-Era</b> wallet.
               </li>
               <li>
-                - Don't using <b>Byron-Era</b> wallet, you will not receive MIN tokens.
+                Don&apos;t using <b>Byron-Era</b> wallet, you will not receive MIN tokens.
               </li>
               <li>
-                - Send <b>exactly</b> 2 ADA to the Min's wallet with the wallet you use to stake MIN tokens before. Your
-                MINt and 1.5 ADA will be sent back to your wallet shortly after.
+                Send <b>exactly</b> 2 ADA to the Min&apos;s wallet with the wallet you use to stake MIN tokens before.
+                Your MINt and 1.5 ADA will be sent back to your wallet shortly after.
               </li>
             </ul>
             <div>
