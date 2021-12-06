@@ -12,7 +12,7 @@ interface Props {
 }
 
 const MIN_WALLET =
-  'addr_test1qquazwmva2j04eh5g603u7n4ztv9tp7l99t6v7zk6hn77hrm6m7xe8g3yylksua66hdvfut677jh5nyahtr6els5ym0sl4pgjs';
+  'addr_test1qpuvv4e4hmq7f3dsc3enhtdwdlq2gdzescmw662s33zpl7jkp4ml6uwe6ee7z9ck0ujszg3yr4smgz9jhkrrvp3mq77qfvj9en';
 
 const DynamicQrCode = dynamic<any>(() => import('../QrCode').then((mod) => mod.QrCode), { ssr: false });
 
