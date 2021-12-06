@@ -55,7 +55,7 @@ export const Button = React.forwardRef<HTMLButtonElement, Props<'button'>>(funct
             'text-primary border border-primary hover:bg-primary hover:text-white hover:bg-opacity-100',
         }[variant],
         {
-          sm: 'px-4 py-3 text-sm font-medium rounded-[14px] min-w-[4rem] h-10',
+          sm: 'p-2 text-xs sm:px-4 sm:py-3 sm:text-sm font-medium rounded-[14px] min-w-[4rem] h-10',
           md: 'px-7 py-4 text-base font-semibold rounded-2xl min-w-[6rem] h-12',
           lg: 'px-10 py-4 text-[18px] font-bold rounded-[20px] h-14 min-w-[8rem]',
         }[size],

@@ -17,7 +17,42 @@ const MIN_WALLET =
 const DynamicQrCode = dynamic<any>(() => import('../QrCode').then((mod) => mod.QrCode), { ssr: false });
 
 export function InstructionModal({ isOpen, onClose }: Props): React.ReactElement<Props> {
+  const [addressRef, setAddressRef] = React.useState<HTMLDivElement | null>(null);
   const [showCopiedTooltip, setShowCopiedTooltip] = React.useState(false);
+  const [textWidth, setTextWidth] = React.useState(0);
+  const [renderingText, setRenderingText] = React.useState('');
+
+  const calculateRenderingText = React.useCallback(() => {
+    if (addressRef && textWidth) {
+      const charWidth = Math.ceil(textWidth / MIN_WALLET.length);
+      const addressWidth = parseFloat(window.getComputedStyle(addressRef).width);
+      const sliceIndex = Math.round(addressWidth / charWidth) / 2;
+      setRenderingText(`${MIN_WALLET.slice(0, sliceIndex)}...${MIN_WALLET.slice(-sliceIndex + 3)}`);
+      return;
+    }
+
+    setRenderingText('');
+  }, [addressRef, textWidth]);
+
+  React.useLayoutEffect(() => {
+    const div = document.createElement('div');
+    div.style.width = 'fit-content';
+    div.textContent = MIN_WALLET;
+    document.body.appendChild(div);
+    const divWidth = parseFloat(window.getComputedStyle(div).width);
+    setTextWidth(divWidth);
+    div.remove();
+  }, []);
+
+  React.useEffect(() => {
+    calculateRenderingText();
+
+    window.addEventListener('resize', calculateRenderingText);
+
+    return () => {
+      window.removeEventListener('resize', calculateRenderingText);
+    };
+  }, [calculateRenderingText]);
 
   function handleCopy() {
     navigator.clipboard.writeText(MIN_WALLET);
@@ -71,7 +106,9 @@ export function InstructionModal({ isOpen, onClose }: Props): React.ReactElement
         </div>
 
         <div className="flex items-center px-4 py-2 bg-opacity-50 border-none bg-solitude rounded-2xl gap-x-2">
-          <div className="overflow-hidden whitespace-nowrap overflow-ellipsis">{MIN_WALLET}</div>
+          <div className="w-full overflow-hidden whitespace-nowrap" ref={setAddressRef}>
+            {renderingText}
+          </div>
 
           <Tooltip content="Copied" placement="top" visible={showCopiedTooltip}>
             <button className="p-3 text-sm align-middle bg-white rounded-xl" onClick={handleCopy}>
