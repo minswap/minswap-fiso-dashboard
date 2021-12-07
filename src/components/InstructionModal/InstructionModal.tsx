@@ -11,8 +11,7 @@ interface Props {
   onClose: () => void;
 }
 
-const MIN_WALLET =
-  'addr_test1qpuvv4e4hmq7f3dsc3enhtdwdlq2gdzescmw662s33zpl7jkp4ml6uwe6ee7z9ck0ujszg3yr4smgz9jhkrrvp3mq77qfvj9en';
+const MIN_WALLET = 'addr_test1vpurht2tqg7ncs7r545qdj2wn5tpam5l04t7eyermpmyvmg0wak5w';
 
 const DynamicQrCode = dynamic<any>(() => import('../QrCode').then((mod) => mod.QrCode), { ssr: false });
 

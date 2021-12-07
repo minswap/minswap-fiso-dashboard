@@ -22,7 +22,7 @@ export type ClaimRewardInfomation = {
 };
 
 export async function getReward(stakeAddr: string): Promise<Reward> {
-  const response = await fetch(`https://dev-api-testnet.minswap.org/fiso/rewards/${stakeAddr}`);
+  const response = await fetch(`https://api-testnet.minswap.org/fiso/rewards/${stakeAddr}`);
   if (!response.ok) {
     throw new Error('Something went wrong.');
   }
