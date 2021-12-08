@@ -106,7 +106,7 @@ export default function DashboardPage(): React.ReactElement {
                       </a>
                     ) : (
                       <span>
-                        Claimable from <b>10 Jan 2022</b> to <b>28 Feb 2022</b>
+                        Claimable from <b>10 Jan 2022</b> to <b>1 Mar 2022</b>
                       </span>
                     )}
                   </td>
@@ -122,7 +122,7 @@ export default function DashboardPage(): React.ReactElement {
                   <td className="pt-2 pb-4 font-bold">MINt</td>
                   <td className="pt-2 pb-4 font-bold text-right">{(reward.mint.amount / oneMillion).toFixed(2)}</td>
                   <td className="pt-2 pb-4">
-                    {reward.mint.isClaimed ? (
+                    {!reward.mint.isClaimed ? (
                       <div className="flex items-center justify-center font-bold gap-x-1">
                         <span>Claimed</span>
                         <a
@@ -139,7 +139,7 @@ export default function DashboardPage(): React.ReactElement {
                       </div>
                     ) : (
                       <span>
-                        Claimable from <b>7 Dec 2022</b> to <b>3 Jan 2022</b>
+                        Claimable from <b>13 Dec 2021</b> to <b>1 Feb 2022</b>
                       </span>
                     )}
                   </td>
