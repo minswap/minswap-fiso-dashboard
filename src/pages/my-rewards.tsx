@@ -122,7 +122,7 @@ export default function DashboardPage(): React.ReactElement {
                   <td className="pt-2 pb-4 font-bold">MINt</td>
                   <td className="pt-2 pb-4 font-bold text-right">{(reward.mint.amount / oneMillion).toFixed(2)}</td>
                   <td className="pt-2 pb-4">
-                    {!reward.mint.isClaimed ? (
+                    {reward.mint.isClaimed ? (
                       <div className="flex items-center justify-center font-bold gap-x-1">
                         <span>Claimed</span>
                         <a
