@@ -1,4 +1,10 @@
 export type Reward = {
+  epochRewards: EpochReward[];
+  min: ClaimRewardInfomation;
+  mint: ClaimRewardInfomation;
+};
+
+export type EpochReward = {
   epoch: number;
   stakeAddr: string;
   poolName: string;
@@ -9,11 +15,17 @@ export type Reward = {
   hasSmallestPoolBonus: boolean;
 };
 
-export async function getRewards(stakeAddr: string): Promise<Reward[]> {
+export type ClaimRewardInfomation = {
+  amount: number;
+  txID: string;
+  isClaimed: boolean;
+};
+
+export async function getReward(stakeAddr: string): Promise<Reward> {
   const response = await fetch(`https://api-mainnet.minswap.org/fiso/rewards/${stakeAddr}`);
   if (!response.ok) {
     throw new Error('Something went wrong.');
   }
-  const body: Reward[] = await response.json();
+  const body: Reward = await response.json();
   return body;
 }

@@ -7,6 +7,7 @@ export * from './ChevronDownIcon';
 export * from './ChevronUpIcon';
 export * from './CloseIcon';
 export * from './ContactIcon';
+export * from './CopyIcon';
 export * from './CurvyArrowAboveIcon';
 export * from './CurvyArrowUnderIcon';
 export * from './DarkLogoIcon';

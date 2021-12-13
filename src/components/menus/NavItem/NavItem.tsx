@@ -29,7 +29,7 @@ export const NavItem = React.forwardRef<HTMLDivElement & HTMLAnchorElement, NavI
         'dark:hover:text-white dark:focus:text-white dark:opacity-50 dark:hover:opacity-100',
         {
           sm: 'gap-x-4 py-2 pl-2 text-base mx-3',
-          md: 'gap-x-6 py-4 pl-3 text-lg mx-5',
+          md: 'gap-x-6 py-4 pl-3 text-lg mx-4',
         }[size],
         isActive ? 'text-primary dark:text-white dark:opacity-100' : 'dark:opacity-50',
         className,
