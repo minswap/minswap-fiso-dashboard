@@ -110,13 +110,15 @@ export default function DashboardPage(): React.ReactElement {
                       </span>
                     )}
                   </td>
-                  <td className="py-4 align-middle" rowSpan={2}>
-                    <div className="flex justify-center">
-                      <Button size="sm" variant="light" onClick={() => setIsOpenInstruction(true)}>
-                        Claim now
-                      </Button>
-                    </div>
-                  </td>
+                  {!reward.mint.isClaimed && (
+                    <td className="py-4 align-middle" rowSpan={2}>
+                      <div className="flex justify-center">
+                        <Button size="sm" variant="light" onClick={() => setIsOpenInstruction(true)}>
+                          Claim now
+                        </Button>
+                      </div>
+                    </td>
+                  )}
                 </tr>
                 <tr className="border-b border-secondary border-opacity-10">
                   <td className="pt-2 pb-4 font-bold">MINt</td>
