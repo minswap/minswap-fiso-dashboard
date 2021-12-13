@@ -98,7 +98,7 @@ export default function DashboardPage(): React.ReactElement {
                     {reward.min.isClaimed ? (
                       <a
                         className="font-semibold text-primary dark:text-white"
-                        href={`https://testnet.cardanoscan.io/transaction/${reward.min.txID}`}
+                        href={`https://cardanoscan.io/transaction/${reward.min.txID}`}
                         rel="noreferrer"
                         target="_blank"
                       >
@@ -127,7 +127,7 @@ export default function DashboardPage(): React.ReactElement {
                         <span>Claimed</span>
                         <a
                           className="font-semibold text-primary dark:text-white"
-                          href={`https://testnet.cardanoscan.io/transaction/${reward.mint.txID}`}
+                          href={`https://cardanoscan.io/transaction/${reward.mint.txID}`}
                           rel="noreferrer"
                           target="_blank"
                         >
