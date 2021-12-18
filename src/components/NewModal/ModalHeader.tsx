@@ -13,8 +13,8 @@ type Props = {
 
 export function ModalHeader({ title, icon, rightButton, onRightButtonClick }: Props) {
   return (
-    <div className="flex items-center px-5 py-4 font-bold text-gray-700">
-      <div className="flex items-center flex-1 gap-x-2">
+    <div className="flex items-center py-4 px-5 font-bold text-gray-700">
+      <div className="flex flex-1 gap-x-2 items-center">
         {icon}
         <Dialog.Title>{title}</Dialog.Title>
       </div>

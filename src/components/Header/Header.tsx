@@ -16,13 +16,13 @@ export function Header({ menuIcon, onMenuButtonClick }: Props) {
 
   return (
     <>
-      <header className="z-40 flex items-center px-5 py-2 bg-white shadow-sm lg:px-7 gap-x-2">
+      <header className="flex z-40 gap-x-2 items-center py-2 px-5 bg-white shadow-sm lg:px-7">
         <IconButton aria-label="Menu" className="lg:hidden" size="lg" onClick={handleMenuButtonClick}>
           {menuIcon}
         </IconButton>
 
         <Link href="/">
-          <a className="flex items-center gap-x-2">
+          <a className="flex gap-x-2 items-center">
             <LogoIcon />
             <span className="text-2xl font-bold leading-none sr-only lg:not-sr-only">Minswap</span>
           </a>

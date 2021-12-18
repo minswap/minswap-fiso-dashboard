@@ -54,7 +54,7 @@ export default function DashboardPage(): React.ReactElement {
   return (
     <Layout>
       <div className="flex-1 w-full lg:w-auto">
-        <div className="px-3 py-4 mx-5 bg-white divide-y shadow-md lg:mx-8 lg:py-6 lg:px-8 divide-secondary divide-opacity-10 rounded-3xl ">
+        <div className="py-4 px-3 mx-5 bg-white rounded-3xl divide-y divide-opacity-10 shadow-md lg:py-6 lg:px-8 lg:mx-8 divide-secondary">
           <div className="pb-3 lg:pb-5">
             <div className="text-xl font-bold">My FISO rewards</div>
             <div className="text-base opacity-60">
@@ -66,7 +66,7 @@ export default function DashboardPage(): React.ReactElement {
           </div>
 
           <div className="py-4 lg:py-7">
-            <div className="flex items-end lg:gap-x-5 gap-x-2">
+            <div className="flex gap-x-2 items-end lg:gap-x-5">
               <Input
                 className="lg:w-[460px]"
                 label="Enter your address"
@@ -91,13 +91,13 @@ export default function DashboardPage(): React.ReactElement {
           {reward && (
             <table className="w-full text-center table-auto">
               <tbody>
-                <tr className="border-b border-secondary border-opacity-10">
+                <tr className="border-b border-opacity-10 border-secondary">
                   <td className="pt-4 pb-2 font-bold">MIN</td>
                   <td className="pt-4 pb-2 font-bold text-right">{(reward.min.amount / oneMillion).toFixed(2)}</td>
                   <td className="pt-4 pb-2">
                     {reward.min.isClaimed ? (
                       <a
-                        className="font-semibold text-primary dark:text-white"
+                        className="font-semibold dark:text-white text-primary"
                         href={`https://cardanoscan.io/transaction/${reward.min.txID}`}
                         rel="noreferrer"
                         target="_blank"
@@ -120,20 +120,20 @@ export default function DashboardPage(): React.ReactElement {
                     </td>
                   )}
                 </tr>
-                <tr className="border-b border-secondary border-opacity-10">
+                <tr className="border-b border-opacity-10 border-secondary">
                   <td className="pt-2 pb-4 font-bold">MINt</td>
                   <td className="pt-2 pb-4 font-bold text-right">{(reward.mint.amount / oneMillion).toFixed(2)}</td>
                   <td className="pt-2 pb-4">
                     {reward.mint.isClaimed ? (
-                      <div className="flex items-center justify-center font-bold gap-x-1">
+                      <div className="flex gap-x-1 justify-center items-center font-bold">
                         <span>Claimed</span>
                         <a
-                          className="font-semibold text-primary dark:text-white"
+                          className="font-semibold dark:text-white text-primary"
                           href={`https://cardanoscan.io/transaction/${reward.mint.txID}`}
                           rel="noreferrer"
                           target="_blank"
                         >
-                          <div className="flex items-center gap-x-1">
+                          <div className="flex gap-x-1 items-center">
                             (View on Cardanoscan
                             <ExternallinkIcon />)
                           </div>
@@ -152,10 +152,10 @@ export default function DashboardPage(): React.ReactElement {
         </div>
 
         {reward && (
-          <div className="px-3 py-4 m-5 bg-white divide-y shadow-md lg:mx-8 lg:py-6 lg:px-8 divide-secondary divide-opacity-10 rounded-3xl">
+          <div className="py-4 px-3 m-5 bg-white rounded-3xl divide-y divide-opacity-10 shadow-md lg:py-6 lg:px-8 lg:mx-8 divide-secondary">
             <table className="w-full text-center table-auto">
               <thead>
-                <tr className="border-b border-secondary border-opacity-10">
+                <tr className="border-b border-opacity-10 border-secondary">
                   <th className="py-3">Epoch</th>
                   <th>Pool</th>
                   <th>Total delegate</th>
@@ -163,7 +163,7 @@ export default function DashboardPage(): React.ReactElement {
                   <th>MINt reward</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-secondary divide-opacity-10">
+              <tbody className="divide-y divide-opacity-10 divide-secondary">
                 {reward.epochRewards.map((epochReward: EpochReward) => (
                   <tr key={epochReward.epoch}>
                     <td className="py-3">

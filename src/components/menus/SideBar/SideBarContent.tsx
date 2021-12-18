@@ -27,7 +27,7 @@ export function SideBarContent({ onOverlayClick }: SideBarContentProps): React.R
     <>
       <m.div
         animate={{ width: '16rem', color: 'unset' }}
-        className="fixed top-0 bottom-0 left-0 z-30 flex flex-col h-full pt-16 overflow-y-auto bg-white dark:bg-blackRussian"
+        className="flex overflow-y-auto fixed top-0 bottom-0 left-0 z-30 flex-col pt-16 h-full bg-white dark:bg-blackRussian"
         exit={{ width: 0, color: 'transparent' }}
         initial={{ width: 0, color: 'transparent' }}
         key="sidebar"
@@ -59,7 +59,7 @@ export function SideBarContent({ onOverlayClick }: SideBarContentProps): React.R
 
       <MotionOverlay
         animate={{ opacity: 1 }}
-        className="fixed inset-0 z-20 bg-opacity-70 bg-primary dark:bg-white dark:bg-opacity-10 backdrop-filter backdrop-blur"
+        className="fixed inset-0 z-20 bg-opacity-70 dark:bg-white dark:bg-opacity-10 bg-primary backdrop-filter backdrop-blur"
         exit={{ opacity: 0 }}
         initial={{ opacity: 0 }}
         key="overlay"

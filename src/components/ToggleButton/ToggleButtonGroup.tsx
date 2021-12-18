@@ -35,7 +35,7 @@ export function ToggleButtonGroup<T>({
 
   return (
     <ToggleButtonContext.Provider value={contextInitialValue}>
-      <div aria-label={ariaLabel} className="flex flex-row items-center justify-between gap-x-4" role="group">
+      <div aria-label={ariaLabel} className="flex flex-row gap-x-4 justify-between items-center" role="group">
         {children}
       </div>
     </ToggleButtonContext.Provider>

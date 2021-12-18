@@ -94,8 +94,8 @@ export function InstructionModal({ isOpen, onClose }: Props): React.ReactElement
         </div>
       </div>
 
-      <div className="flex items-center px-4 py-2 mt-5 bg-opacity-50 border-none bg-solitude rounded-2xl gap-x-2">
-        <div className="w-full overflow-hidden whitespace-nowrap" ref={setAddressRef}>
+      <div className="flex gap-x-2 items-center py-2 px-4 mt-5 bg-opacity-50 rounded-2xl border-none bg-solitude">
+        <div className="overflow-hidden w-full whitespace-nowrap" ref={setAddressRef}>
           {renderingText}
         </div>
 

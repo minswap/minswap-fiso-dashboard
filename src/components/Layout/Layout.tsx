@@ -22,13 +22,13 @@ export function Layout({ children }: Props) {
   }
 
   return (
-    <div className="flex flex-col w-full min-h-full bg-mainLayout bg-opacity-60">
+    <div className="flex flex-col w-full min-h-full bg-opacity-60 bg-mainLayout">
       <Header
         menuIcon={isMobileMenuOpen ? <MenuCollapseIcon /> : <MenuIcon />}
         onMenuButtonClick={handleMenuButtonClick}
       />
 
-      <main className="flex items-start flex-1 pt-10 pb-10 lg:pt-8 lg:pb-0 lg:px-5">
+      <main className="flex flex-1 items-start pt-10 pb-10 lg:px-5 lg:pt-8 lg:pb-0">
         <NavBar />
 
         <SideBar isOpen={isMobileMenuOpen} onClose={handleSideBarClose} />
