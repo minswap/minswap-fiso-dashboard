@@ -38,7 +38,7 @@ export function Modal({
         <Dialog
           animate={{ opacity: 1 }}
           as={m.div}
-          className="fixed inset-0 z-50 flex items-end justify-center pb-0 sm:py-24 sm:pb-24 sm:items-center"
+          className="flex fixed inset-0 z-50 justify-center items-end pb-0 sm:items-center sm:py-24 sm:pb-24"
           exit={{ opacity: 0 }}
           initial={{ opacity: 0 }}
           initialFocus={initialFocus}
@@ -58,7 +58,7 @@ export function Modal({
             transition={{ duration: 0.15 }}
           >
             {header ?? <ModalHeader icon={headerIcon} title={title} onRightButtonClick={onClose} />}
-            {separateHeader ? <div className="h-px mx-5 bg-opacity-10 bg-secondary" /> : null}
+            {separateHeader ? <div className="mx-5 h-px bg-opacity-10 bg-secondary" /> : null}
             <div className={classnames('flex-1 px-5 pb-5 overflow-y-auto min-h-[min-content]', classes?.content)}>
               {children}
             </div>

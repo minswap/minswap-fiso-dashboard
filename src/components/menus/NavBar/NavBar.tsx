@@ -6,7 +6,7 @@ import { NavBarSubMenu } from './NavBarSubMenu';
 
 export function NavBar(): React.ReactElement {
   return (
-    <nav className="hidden w-64 text-base bg-white shadow-md dark:bg-blackRussian lg:block py-7 rounded-2xl">
+    <nav className="hidden py-7 w-64 text-base bg-white rounded-2xl shadow-md lg:block dark:bg-blackRussian">
       <ul className="list-none">
         {menuLinks.map((link) => (
           <NavLink href={link.href} icon={link.icon} key={link.text} text={link.text} />
