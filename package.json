@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Minswap FISO dashboard",
   "engines": {
-    "node": "14"
+    "node": "16"
   },
+  "engineStrict": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
