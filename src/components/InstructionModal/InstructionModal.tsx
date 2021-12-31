@@ -96,10 +96,14 @@ export function InstructionModal({ isOpen, onClose }: Props): React.ReactElement
             </ol>
             <br />
             <div>
-              <b>Important:</b> Please consult your local tax advisor for the tax implication of claiming token airdrop!
-              <br />
-              <b>Note:</b> Any surplus amount above 2 ADA or amount below 2 ADA sent will be treated as donation for
-              Minswap team.
+              <div>
+                <b>Important:</b> Please consult your local tax advisor for the tax implication of claiming token
+                airdrop!
+              </div>
+              <div className="mt-2">
+                <b>Note:</b> Any surplus amount above 2 ADA or amount below 2 ADA sent will be treated as donation for
+                Minswap team.
+              </div>
             </div>
           </div>
         </div>

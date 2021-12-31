@@ -2,10 +2,11 @@ import * as React from 'react';
 
 import { EpochReward, getReward, Reward } from 'src/api/rewards';
 import { Button } from 'src/components/Button';
-import { ExternallinkIcon } from 'src/components/icons';
+import { ExternallinkIcon, InfoIcon } from 'src/components/icons';
 import { Input } from 'src/components/Input';
 import { InstructionModal } from 'src/components/InstructionModal';
 import { Layout } from 'src/components/Layout';
+import { Tooltip } from 'src/components/Tooltip';
 import { paymentAddrToStakeAddr } from 'src/utils';
 
 const paymentAddrRegExp = new RegExp('^addr[a-z0-9]{99}$');
@@ -18,6 +19,7 @@ export default function DashboardPage(): React.ReactElement {
   const [reward, setReward] = React.useState<Reward>();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isOpenInstruction, setIsOpenInstruction] = React.useState<boolean>(false);
+  const [showTooltip, setTooltip] = React.useState(false);
 
   async function handleGetRewards() {
     setReward(undefined);
@@ -51,6 +53,14 @@ export default function DashboardPage(): React.ReactElement {
     setAddress(event.target.value.trim().toLowerCase());
   }
 
+  React.useEffect(() => {
+    if (showTooltip) {
+      setTimeout(() => {
+        setTooltip(false);
+      }, 1000);
+    }
+  }, [showTooltip]);
+
   return (
     <Layout>
       <div className="flex-1 w-full lg:w-auto">
@@ -62,6 +72,14 @@ export default function DashboardPage(): React.ReactElement {
               <span className="opacity-100"> 🔥 </span>
               from the 11<sup>th</sup> epoch onwards (inclusive) and we will be distributed alongside the airdrop at the
               end of the FISO.
+              <ul className="ml-1 list-disc list-inside">
+                <li>
+                  <b>MINt</b>: claimable from <b>13 Dec 2021</b> to <b>1 Feb 2022</b>
+                </li>
+                <li>
+                  <b>MIN</b>: claimable from <b>10 Jan 2022</b> to <b>1 Mar 2022</b>
+                </li>
+              </ul>
             </div>
           </div>
 
@@ -92,36 +110,12 @@ export default function DashboardPage(): React.ReactElement {
             <table className="w-full text-center table-auto">
               <tbody>
                 <tr className="border-b border-secondary border-opacity-10">
-                  <td className="pt-4 pb-2 font-bold">MIN</td>
-                  <td className="pt-4 pb-2 font-bold text-right">{(reward.min.amount / oneMillion).toFixed(2)}</td>
-                  <td className="pt-4 pb-2">
-                    {reward.min.isClaimed ? (
-                      <a
-                        className="font-semibold text-primary dark:text-white"
-                        href={`https://testnet.cardanoscan.io/transaction/${reward.min.txID}`}
-                        rel="noreferrer"
-                        target="_blank"
-                      >
-                        View on Cardanoscan
-                      </a>
-                    ) : (
-                      <span>
-                        Claimable from <b>10 Jan 2022</b> to <b>1 Mar 2022</b>
-                      </span>
-                    )}
+                  <td className="py-2 font-bold">MINt</td>
+                  <td className="py-2 font-bold">
+                    <div className="text-sm font-normal opacity-60">Amount</div>
+                    {(reward.mint.amount / oneMillion).toFixed(2)}
                   </td>
-                  <td className="py-4 align-middle" rowSpan={2}>
-                    <div className="flex justify-center">
-                      <Button size="sm" variant="light" onClick={() => setIsOpenInstruction(true)}>
-                        Claim now
-                      </Button>
-                    </div>
-                  </td>
-                </tr>
-                <tr className="border-b border-secondary border-opacity-10">
-                  <td className="pt-2 pb-4 font-bold">MINt</td>
-                  <td className="pt-2 pb-4 font-bold text-right">{(reward.mint.amount / oneMillion).toFixed(2)}</td>
-                  <td className="pt-2 pb-4">
+                  <td className="py-2">
                     {reward.mint.isClaimed ? (
                       <div className="flex items-center justify-center font-bold gap-x-1">
                         <span>Claimed</span>
@@ -138,10 +132,42 @@ export default function DashboardPage(): React.ReactElement {
                         </a>
                       </div>
                     ) : (
-                      <span>
-                        Claimable from <b>13 Dec 2021</b> to <b>1 Feb 2022</b>
-                      </span>
+                      <span>Unclaim</span>
                     )}
+                  </td>
+                  {(reward.min.amountClaimable > 0 || !reward.mint.isClaimed) && (
+                    <td className="py-4 align-middle" rowSpan={2}>
+                      <div className="flex justify-center">
+                        <Button size="sm" variant="light" onClick={() => setIsOpenInstruction(true)}>
+                          Claim now
+                        </Button>
+                      </div>
+                    </td>
+                  )}
+                </tr>
+                <tr className="border-b border-secondary border-opacity-10">
+                  <td className="pt-2 pb-2 font-bold">MIN</td>
+                  <td className="pt-2 pb-2 font-bold">
+                    <div className="text-sm font-normal opacity-60">Amount</div>
+                    {(reward.min.amount / oneMillion).toFixed(2)}
+                  </td>
+                  <td className="pt-2 pb-2 font-bold ">
+                    <div className="flex items-center justify-center space-x-1">
+                      <div className="text-sm font-normal opacity-60">Claimable</div>
+                      <Tooltip
+                        className="bg-solitude"
+                        content={`You has claimed ${(reward.min.amountClaimed / oneMillion).toFixed(2)} MIN. 
+                      Now, you can claim ${(reward.min.amountClaimable / oneMillion).toFixed(2)} MIN.`}
+                        placement="bottom"
+                        visible={showTooltip}
+                        arrow
+                      >
+                        <button onClick={() => setTooltip(true)}>
+                          <InfoIcon height={16} width={16} />
+                        </button>
+                      </Tooltip>
+                    </div>
+                    {(reward.min.amountClaimable / oneMillion).toFixed(2)}
                   </td>
                 </tr>
               </tbody>
