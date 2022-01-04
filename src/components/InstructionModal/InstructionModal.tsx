@@ -1,9 +1,8 @@
 import * as React from 'react';
 import dynamic from 'next/dynamic';
 
-import { IconButton } from '../IconButton';
-import { CloseIcon, CopyIcon } from '../icons';
-import { Modal, ModalContent, ModalTitle } from '../Modal';
+import { CopyIcon } from '../icons';
+import { Modal } from '../NewModal';
 import { Tooltip } from '../Tooltip';
 
 interface Props {
@@ -11,7 +10,7 @@ interface Props {
   onClose: () => void;
 }
 
-const MIN_WALLET = 'addr_test1vpurht2tqg7ncs7r545qdj2wn5tpam5l04t7eyermpmyvmg0wak5w';
+const MIN_WALLET = 'addr1v9urht2tqg7ncs7r545qdj2wn5tpam5l04t7eyermpmyvmg5xf2mt';
 
 const DynamicQrCode = dynamic<any>(() => import('../QrCode').then((mod) => mod.QrCode), { ssr: false });
 
@@ -67,33 +66,27 @@ export function InstructionModal({ isOpen, onClose }: Props): React.ReactElement
   }, [showCopiedTooltip]);
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalContent className="p-5 max-w-lg flex flex-col overflow-y-auto gap-y-4 max-h-[50rem] divide-y divide-opacity-10 divide-secondary">
-        <div className="flex items-center px-2 gap-x-2">
-          <ModalTitle className="flex-1 text-lg font-bold text-left">Claim information</ModalTitle>
-
-          <IconButton aria-label="Close" size="sm" onClick={onClose}>
-            <CloseIcon />
-          </IconButton>
+    <Modal isOpen={isOpen} title="Claim information" separateHeader onClose={onClose}>
+      <div className="pt-5">
+        <div className="float-left mr-4 border">
+          <DynamicQrCode paymentAddress={MIN_WALLET} />
         </div>
 
-        <div className="pt-5">
-          <div className="float-left mr-4 border">
-            <DynamicQrCode paymentAddress={MIN_WALLET} />
-          </div>
-
+        <div>
+          <span>Before claiming please ensure the following:</span>
+          <ol className="list-decimal list-inside">
+            <li>
+              You are using a <b>Cardano native</b> wallet that accepts Cardano native tokens like Yoroi, Nami,
+              Daedalus,... If you send ADA from exchanges, you <b>will not</b> receive MIN and MINt tokens.
+            </li>
+            <li>
+              Send <b>exactly</b> 2 ADA to the Minswap wallet with the wallet you used to stake to FISO. Your MINt along
+              with 1.5 ADA will be sent back to your wallet shortly after.
+            </li>
+          </ol>
+          <br />
           <div>
-            <span>Before claiming please ensure the following:</span>
-            <ol className="list-decimal list-inside">
-              <li>
-                You are using a <b>Cardano native</b> wallet that accepts Cardano native tokens like Yoroi, Nami,
-                Daedalus,... If you send ADA from exchanges, you <b>will not</b> receive MIN and MINt tokens.
-              </li>
-              <li>
-                Send <b>exactly</b> 2 ADA to the Minswap wallet with the wallet you used to stake to FISO. Your MINt
-                along with 1.5 ADA will be sent back to your wallet shortly after.
-              </li>
-            </ol>
+            <b>Important:</b> Please consult your local tax advisor for the tax implication of claiming token airdrop!
             <br />
             <div>
               <div>
@@ -107,19 +100,19 @@ export function InstructionModal({ isOpen, onClose }: Props): React.ReactElement
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="flex items-center px-4 py-2 bg-opacity-50 border-none bg-solitude rounded-2xl gap-x-2">
-          <div className="w-full overflow-hidden whitespace-nowrap" ref={setAddressRef}>
-            {renderingText}
-          </div>
-
-          <Tooltip content="Copied" placement="top" visible={showCopiedTooltip}>
-            <button className="p-3 text-sm align-middle bg-white rounded-xl" onClick={handleCopy}>
-              <CopyIcon />
-            </button>
-          </Tooltip>
+      <div className="flex gap-x-2 items-center py-2 px-4 mt-5 bg-opacity-50 rounded-2xl border-none bg-solitude">
+        <div className="overflow-hidden w-full whitespace-nowrap" ref={setAddressRef}>
+          {renderingText}
         </div>
-      </ModalContent>
+
+        <Tooltip content="Copied" placement="top" visible={showCopiedTooltip}>
+          <button className="p-3 text-sm align-middle bg-white rounded-xl" onClick={handleCopy}>
+            <CopyIcon />
+          </button>
+        </Tooltip>
+      </div>
     </Modal>
   );
 }

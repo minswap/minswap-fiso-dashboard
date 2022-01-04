@@ -4,7 +4,7 @@ import { Layout } from 'src/components/Layout';
 export default function ThankyouPage(): React.ReactElement {
   return (
     <Layout>
-      <div className="flex-1 w-full px-2 lg:w-auto lg:pl-8 lg:px-0">
+      <div className="flex-1 px-2 w-full lg:px-0 lg:pl-8 lg:w-auto">
         <div className="p-6 sm:p-10 bg-white shadow-xl rounded-[30px]">
           <div className="flex">
             <div className="p-3 rounded-full bg-primary">
@@ -12,7 +12,7 @@ export default function ThankyouPage(): React.ReactElement {
             </div>
             <div className="flex-1 ml-5 text-[40px] text-primary font-medium">Thank you</div>
           </div>
-          <div className="mt-7 text-dark font-medium">
+          <div className="mt-7 font-medium text-dark">
             Hi everyone 🖖​
             <br />
             <br />
@@ -21,7 +21,7 @@ export default function ThankyouPage(): React.ReactElement {
             We are working on the final epoch&apos;s rewards and the claiming system. The system will go live on testnet
             on December 7<sup>th</sup> and mainnet on December 13<sup>th</sup>.&nbsp;
             <a
-              className="text-primary hover:underline"
+              className="hover:underline text-primary"
               href="https://medium.com/minswap/fiso-has-ended-whats-next-c29b3cca25d5"
               rel="noopener noreferrer"
               target="_blank"

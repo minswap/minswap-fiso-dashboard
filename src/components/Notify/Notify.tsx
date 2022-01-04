@@ -59,7 +59,7 @@ export function Notify({
   return (
     <Modal initialFocus={buttonRef} isOpen={isOpen} onClose={onClose}>
       <ModalContent className="p-5 max-w-md flex flex-col overflow-y-auto dark:bg-blackRussian dark:divide-opacity-10 dark:divide-white gap-y-6 max-h-[50rem] divide-y divide-opacity-10 divide-secondary">
-        <div className="flex items-center px-2 gap-x-2">
+        <div className="flex gap-x-2 items-center px-2">
           <ModalTitle className="flex-1 text-lg font-bold text-left">{title}</ModalTitle>
 
           <IconButton aria-label="Close" size="sm" onClick={onClose}>

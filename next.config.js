@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-const withTM = require('next-transpile-modules')(['crypto-random-string']);
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
@@ -9,14 +8,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
  * @type {import('next/dist/next-server/server/config').NextConfig}
  **/
 const config = {
-  target: 'serverless',
   reactStrictMode: true,
-  future: {
-    strictPostcssConfiguration: true,
-  },
-  experimental: {
-    optimizeCss: true,
-  },
   images: {
     domains: ['assets.coingecko.com', 'unavatar.io'],
     deviceSizes: [640, 768, 1024, 1280, 1536],
@@ -38,4 +30,4 @@ const config = {
   },
 };
 
-module.exports = withBundleAnalyzer(withTM(config));
+module.exports = withBundleAnalyzer(config);
