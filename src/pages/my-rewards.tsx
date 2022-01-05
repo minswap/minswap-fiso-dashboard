@@ -132,7 +132,7 @@ export default function DashboardPage(): React.ReactElement {
                         </a>
                       </div>
                     ) : (
-                      <span>Unclaim</span>
+                      <span>Unclaimed</span>
                     )}
                   </td>
                   {(reward.min.amountClaimable > 0 || !reward.mint.isClaimed) && (
@@ -156,7 +156,7 @@ export default function DashboardPage(): React.ReactElement {
                       <div className="text-sm font-normal opacity-60">Claimable</div>
                       <Tooltip
                         className="bg-solitude"
-                        content={`You has claimed ${(reward.min.amountClaimed / oneMillion).toFixed(2)} MIN. 
+                        content={`You have claimed ${(reward.min.amountClaimed / oneMillion).toFixed(2)} MIN. 
                       Now, you can claim ${(reward.min.amountClaimable / oneMillion).toFixed(2)} MIN.`}
                         placement="bottom"
                         visible={showTooltip}
