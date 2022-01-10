@@ -26,7 +26,7 @@ export type EpochReward = {
 };
 
 export async function getReward(stakeAddr: string): Promise<Reward> {
-  const response = await fetch(`https://api-testnet.minswap.org/fiso/rewards/${stakeAddr}`);
+  const response = await fetch(`https://api-mainnet.minswap.org/fiso/rewards/${stakeAddr}`);
   if (!response.ok) {
     const body = await response.json();
     throw new Error(body.message);
