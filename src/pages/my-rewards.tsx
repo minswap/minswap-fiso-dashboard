@@ -74,10 +74,10 @@ export default function DashboardPage(): React.ReactElement {
               end of the FISO.
               <ul className="ml-1 list-disc list-inside">
                 <li>
-                  <b>MINt</b>: claimable from <b>13 Dec 2021</b> to <b>1 Feb 2022</b>
+                  <b>MINt</b>: claimable from <b>13 Dec 2021</b> to <b>11 Mar 2022</b>
                 </li>
                 <li>
-                  <b>MIN</b>: claimable from <b>10 Jan 2022</b> to <b>1 Mar 2022</b>
+                  <b>MIN</b>: claimable from <b>10 Jan 2022</b> to <b>11 Mar 2022</b>
                 </li>
               </ul>
             </div>
